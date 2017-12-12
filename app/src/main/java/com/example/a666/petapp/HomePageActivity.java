@@ -27,6 +27,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 public class HomePageActivity extends BaseActivity implements View.OnClickListener {
 
 
+
     private ImageView image_Personage_Centre;
     private EditText edit_sousuo;
     private ImageView image_Orientation;
