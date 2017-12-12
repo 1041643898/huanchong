@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PetAPP</string>
+    <string name="edit_text_sousuo">地区/街道/小区</string>
 </resources>

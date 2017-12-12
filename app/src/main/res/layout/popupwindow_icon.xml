@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9999"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="vertical">
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/corners_bg_top"
+                android:text="更换用户头像"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#A2A2A2" />
+            <Button
+                android:id="@+id/but_pai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/corners_bg_bottom"
+                android:text="拍照"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#007FAA" />
+
+            <Button
+                android:id="@+id/but_Phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/corners"
+                android:text="相册"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#007FAA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/corners_bg"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/but_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/corners_bg"
+                android:text="取消"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#007FAA" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

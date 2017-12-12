@@ -27,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutID());
-        MyApplication.baseActivity=this;
+        MyApplication.baseActivity = this;
         initView();
         initDate();
         initLisenter();
@@ -37,11 +37,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         //沉浸式状态栏
         screenManager.setStatusBar(isSetStatusBar, this);
         //是否旋转屏幕
-        screenManager.setScreenRoate(isAllowScreenRoate, this);
+        // screenManager.setScreenRoate(isAllowScreenRoate, this);
         //全屏
 //       screenManager.setFullScreen(isAllowFullScreen, this);
 
     }
+
     protected abstract int getLayoutID();
 
     //上下文
@@ -146,8 +147,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
 
 
 }
