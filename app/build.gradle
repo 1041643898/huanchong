@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.example.a666.petapp"
         minSdkVersion 15
@@ -29,5 +29,9 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.github.bumptech.glide:glide:4.0.0'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.google.zxing:core:3.3.0'
+    compile 'com.android.support:design:25.2.0'
+    compile 'cn.aigestudio.datepicker:DatePicker:2.2.0'
+    compile 'com.github.userswlwork:pull-to-refresh:1.0.0'
     testCompile 'junit:junit:4.12'
 }

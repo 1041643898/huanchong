@@ -7,7 +7,6 @@ package com.example.a666.petapp.httpinf;
 public interface Callbacks<T> {
     //失败的方法
     void Failure(String str);
-
     //成功的方法
     void Succeed(T str);
 }
