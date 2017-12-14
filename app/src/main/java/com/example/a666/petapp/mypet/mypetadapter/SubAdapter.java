@@ -1,4 +1,4 @@
-package com.example.ta;
+package com.example.a666.petapp.mypet.mypetadapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.a666.petapp.R;
+import com.example.a666.petapp.mypet.MyPetActivity;
 
 import java.util.ArrayList;
 
@@ -17,7 +20,7 @@ public class SubAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<String> list;
 
-    public SubAdapter(MainActivity mainActivity, ArrayList<String> list) {
+    public SubAdapter(MyPetActivity mainActivity, ArrayList<String> list) {
 
         this.context = mainActivity;
         this.list = list;

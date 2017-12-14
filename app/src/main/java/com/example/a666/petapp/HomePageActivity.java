@@ -22,10 +22,10 @@ import com.example.a666.petapp.adapter.PopupAdapter;
 import com.example.a666.petapp.base.BaseActivity;
 import com.example.a666.petapp.homepage.Personal_InformationActivity;
 import com.example.a666.petapp.homepage.PopupButton;
+import com.example.a666.petapp.mypet.MyPetActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class HomePageActivity extends BaseActivity implements View.OnClickListener {
-
 
 
     private ImageView image_Personage_Centre;
@@ -153,6 +153,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         linear_Pat_Genre.setOnClickListener(this);
         linear_ShaiXuan.setOnClickListener(this);
         linear_name.setOnClickListener(this);
+        linear_Pet.setOnClickListener(this);
 //----------------------------------------------------------------------------------
         popu_but_nearby = (PopupButton) findViewById(R.id.popu_but_nearby);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -197,8 +198,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     //----------------------------------------------------------------------------------
 
 
-
-@Override
+    @Override
     protected void initDate() {
 
     }
@@ -242,6 +242,8 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 break;
             //宠物
             case R.id.linear_Pet:
+                startActivity(new Intent(HomePageActivity.this, MyPetActivity.class));
+
 
                 break;
             //订单

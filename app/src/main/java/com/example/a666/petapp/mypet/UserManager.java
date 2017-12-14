@@ -1,7 +1,9 @@
-package com.example.pandachannel;
+package com.example.a666.petapp.mypet;
 
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+
+import com.example.a666.petapp.app.MyApplication;
 
 /**
  * Created by yuerq on 2016/5/25.
@@ -15,7 +17,7 @@ public class UserManager {
     private boolean isUserInfoRetrieved;
 
     private UserManager(){
-        prefs = Api.baseActivity.getSharedPreferences("user_info", 0);
+        prefs = MyApplication.baseActivity.getSharedPreferences("user_info", 0);
     }
 
     public static UserManager getInstance() {

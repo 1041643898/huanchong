@@ -1,4 +1,4 @@
-package com.example.pandachannel.utils;
+package com.example.a666.petapp.mypet;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

@@ -1,4 +1,4 @@
-package com.example.ta.round_imageview;
+package com.example.a666.petapp.mypet.round_imageview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,7 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.util.AttributeSet;
 
-import com.example.ta.R;
+import com.example.a666.petapp.R;
 
 
 /**

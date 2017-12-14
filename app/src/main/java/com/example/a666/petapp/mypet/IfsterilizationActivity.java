@@ -1,4 +1,4 @@
-package com.example.ta;
+package com.example.a666.petapp.mypet;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import com.example.a666.petapp.R;
 
 public class IfsterilizationActivity extends AppCompatActivity {
 

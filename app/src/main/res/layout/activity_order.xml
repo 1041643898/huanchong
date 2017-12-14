@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a666.petapp.order.OrderActivity">
+    tools:context="com.example.a666.petapp.order.WaitYesActivity">
+
+
+
+
 
 </android.support.constraint.ConstraintLayout>

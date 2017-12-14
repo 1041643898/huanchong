@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.ta.AddpetActivity">
+    tools:context="com.example.a666.petapp.mypet.AddpetActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,14 +58,15 @@
             android:text="头像"
              />
 
-        <com.example.ta.round_imageview.RoundImageView
+        <ImageView
             android:id="@+id/imageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
 
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/pet" />
+            android:src="@mipmap/pet"
+             />
 
         <ImageView
 
@@ -266,4 +267,5 @@
         android:layout_width="match_parent"
         android:gravity="top"
         android:layout_height="wrap_content" />
+
 </LinearLayout>

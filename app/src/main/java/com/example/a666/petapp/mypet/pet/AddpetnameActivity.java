@@ -1,4 +1,4 @@
-package com.example.ta.pet;
+package com.example.a666.petapp.mypet.pet;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -13,7 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ta.R;
+import com.example.a666.petapp.R;
+
 
 public class AddpetnameActivity extends AppCompatActivity implements View.OnClickListener {
 

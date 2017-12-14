@@ -12,6 +12,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 import com.example.a666.petapp.R;
@@ -22,7 +23,7 @@ import com.example.a666.petapp.R;
  *
  * @author Alan
  */
-public class RoundImageView extends android.support.v7.widget.AppCompatImageView {
+public class RoundImageView extends AppCompatImageView {
 
 
 	private int mBorderThickness = 0;

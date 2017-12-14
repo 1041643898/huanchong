@@ -1,4 +1,4 @@
-package com.example.ta;
+package com.example.a666.petapp.mypet;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -12,10 +12,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.example.ta.adapter.PetTypeAdapter;
-import com.example.ta.fragments.FragmentCat;
-import com.example.ta.fragments.FragmentDog;
-import com.example.ta.fragments.FragmentSmall;
+import com.example.a666.petapp.R;
+import com.example.a666.petapp.mypet.fragments.FragmentCat;
+import com.example.a666.petapp.mypet.fragments.FragmentDog;
+import com.example.a666.petapp.mypet.fragments.FragmentSmall;
 
 import java.util.ArrayList;
 

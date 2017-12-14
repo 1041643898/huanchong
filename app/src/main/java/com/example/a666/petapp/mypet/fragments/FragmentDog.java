@@ -1,4 +1,4 @@
-package com.example.ta.fragments;
+package com.example.a666.petapp.mypet.fragments;
 
 
 import android.os.Bundle;
@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ta.R;
+import com.example.a666.petapp.R;
+
 
 /**
  * A simple {@link Fragment} subclass.

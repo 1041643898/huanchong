@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.a666.petapp.R;
 
-public class YesActivity extends AppCompatActivity {
+public class WaitYesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.example.ta;
+package com.example.a666.petapp.mypet;
 
 import android.Manifest;
 import android.app.Activity;
@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -30,20 +31,43 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ta.pet.AddpetnameActivity;
-import com.example.ta.pet.AddweightActivity;
-import com.example.ta.round_imageview.OnBooleanListener;
-import com.example.ta.round_imageview.RoundImageView;
+import com.example.a666.petapp.R;
+import com.example.a666.petapp.base.BaseActivity;
+import com.example.a666.petapp.homepage.date.CustomDatePicker;
+import com.example.a666.petapp.mypet.pet.AddpetnameActivity;
+import com.example.a666.petapp.mypet.pet.AddweightActivity;
+import com.example.a666.petapp.mypet.round_imageview.OnBooleanListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class AddpetActivity extends BaseActivity implements View.OnClickListener {
     private PopupWindow popupWindow;
+    private UserManager mUserManager = UserManager.getInstance();
+    protected static final int TAKE_PICTURE = 1;
+    private static final int CROP_SMALL_PICTURE = 2;
     public final String USER_IMAGE_NAME = "image.png";
     public final String USER_CROP_IMAGE_NAME = "temporary.png";
     public Uri imageUriFromCamera;
@@ -62,7 +86,10 @@ public class AddpetActivity extends BaseActivity implements View.OnClickListener
     private LinearLayout addpet_petintro;
     private CustomDatePicker customDatePicker1, customDatePicker2;
     private TextView tv_Date;
-    private RoundImageView imageView;
+    private String verifycode;
+    private Uri tempUri;
+    protected static final int CHOOSE_PICTURE = 0;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +140,7 @@ public class AddpetActivity extends BaseActivity implements View.OnClickListener
         tv_Date = (TextView) findViewById(R.id.tv_Date);
         tv_Date.setOnClickListener(this);
         ShowDate_of_Birth();
-        imageView = (RoundImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setOnClickListener(this);
     }
 
@@ -153,7 +180,7 @@ public class AddpetActivity extends BaseActivity implements View.OnClickListener
                 break;
             //头像
             case R.id.headportrait:
-                startActivity(new Intent(AddpetActivity.this, HeadPortraitActivity.class));
+               // startActivity(new Intent(AddpetActivity.this, HeadPortraitActivity.class));
 
                 break;
             case R.id.addpet_ifsterilization:
@@ -255,7 +282,7 @@ public class AddpetActivity extends BaseActivity implements View.OnClickListener
                                 * */
                                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 imageUriFromCamera = FileProvider.getUriForFile(AddpetActivity.this,
-                                        "com.example.ta.fileprovider", photoFile);
+                                        "com.example.a666.petapp.fileprovider", photoFile);
                                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriFromCamera);
 
                                 startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
@@ -280,7 +307,7 @@ public class AddpetActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onClick(View view) {
 
-
+                choseHeadImageFromGallery();
                 popupWindow.dismiss();
             }
 
@@ -296,6 +323,11 @@ public class AddpetActivity extends BaseActivity implements View.OnClickListener
 
     }
 
+    private void choseHeadImageFromGallery() {
+        Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        openAlbumIntent.setType("image/*");
+        startActivityForResult(openAlbumIntent, CHOOSE_PICTURE);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
@@ -325,10 +357,51 @@ public class AddpetActivity extends BaseActivity implements View.OnClickListener
                     break;
                 default:
                     break;
+                case CHOOSE_PICTURE:
+                    Uri data1 = data.getData();
+                    startPhotoZoom(data1); // 开始对图片进行裁剪处理
+                    break;
+                case TAKE_PICTURE:
+                    startPhotoZoom(tempUri);
+                    break;
+                case CROP_SMALL_PICTURE:
+                    if (data != null) {
+                        setImageToView(data); // 让刚才选择裁剪得到的图片显示在界面上
+                    }
+                    break;
             }
+
         }
 
 
+    }
+    protected void setImageToView(Intent data) {
+        Bundle extras = data.getExtras();
+        if (extras != null) {
+            Bitmap photo = extras.getParcelable("data");
+            ImageUtils.toRoundBitmap(photo);
+            imageView.setImageBitmap(photo);
+            uploadPic(photo);
+        }
+    }
+    protected void startPhotoZoom(Uri uri) {
+        if (uri == null) {
+            Log.i("tag", "The uri is not exist.");
+        }
+        tempUri = uri;
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        // 设置裁剪
+        intent.putExtra("crop", "true");
+        // aspectX aspectY 是宽高的比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 150);
+        intent.putExtra("outputY", 150);
+        intent.putExtra("return-data", true);
+        tempUri = null;
+        startActivityForResult(intent, CROP_SMALL_PICTURE);
     }
 
     private OnBooleanListener onPermissionListener;
@@ -414,5 +487,81 @@ public class AddpetActivity extends BaseActivity implements View.OnClickListener
         WeakReference<Bitmap> weak = new WeakReference<Bitmap>(
                 BitmapFactory.decodeFile(path, opts));
         return Bitmap.createScaledBitmap(weak.get(), w, h, true);
+    }
+    private void uploadPic(Bitmap bitmap) {
+        // 上传至服务器
+        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
+        // 注意这里得到的图片已经是圆形图片了
+        // bitmap是没有做个圆形处理的，但已经被裁剪了
+        final String imagePath = ImageUtils.savePhoto(bitmap, Environment
+                .getExternalStorageDirectory().getAbsolutePath(), String
+                .valueOf(System.currentTimeMillis()));
+        if (imagePath != null) {
+//            String url = "http://my.cntv.cn/intf/napi/api.php" + "?client="
+//                    + "cbox_mobile" + "&method=" + "user.alterUserFace"
+//                    + "&userid=" + mUserManager.getUserId();
+            String url = "http://my.cntv.cn/intf/napi/api.php";
+            Log.e("TAG", "-----verifycode----" + "开始");
+            OkHttpClient okHttpClient = new OkHttpClient.Builder().cookieJar(new CookieJar() {
+                List<Cookie> cooKies = new ArrayList<>();
+
+                @Override
+                public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+                    cooKies = cookies;
+                    Log.e("TAG", "-----verifycode----" + "进行中");
+                    for (Cookie cookie : cooKies) {
+                        Log.e("TAG", "-----verifycode----" + cookie.value());
+                        if ("verifycode".equals(cookie.name())) {
+                            verifycode = cookie.value();
+                        }
+                    }
+                }
+
+                @Override
+                public List<Cookie> loadForRequest(HttpUrl url) {
+                    return cooKies;
+                }
+            }).build();
+            Log.e("TAG", "-----verifycode----" + "结束");
+            File file = new File(imagePath);
+            MultipartBody.Builder builder = new MultipartBody.Builder();
+            builder.setType(MultipartBody.FORM);
+            builder.addFormDataPart("client", "ipanda_mobile");
+            builder.addFormDataPart("method", "user.alterUserFace");
+            builder.addFormDataPart("userid", mUserManager.getUserId());
+            builder.addFormDataPart("facefile", file.getName(), RequestBody.create(MediaType.parse("image/png"), file));
+            RequestBody body = builder.build();
+//            Request request = new Request.Builder().url(url).build();
+            Request request = new Request.Builder().url(url).addHeader("Referer", "iPanda.Android")
+                    .addHeader("User-Agent", "CNTV_APP_CLIENT_CBOX_MOBILE")
+                    .addHeader("Cookie", "verifycode=" + mUserManager.getVerifycode()).post(body).build();
+
+            okHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.e("TAG", mUserManager.getUserId() + "----------上传头像--------失败" + verifycode);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String string = response.body().string();
+                    try {
+                        JSONObject jsonObject = new JSONObject(string);
+                        int code = jsonObject.getInt("code");
+                        if (code == 0) {
+                            String error = jsonObject.getString("error");
+                            Log.e("TAG", mUserManager.getUserId() + "----------上传头像--------成功" + error);
+                        } else if (code == -100) {
+                            String error = jsonObject.getString("error");
+                            Log.e("TAG", "--------error-----" + error);
+                            Log.e("TAG", mUserManager.getUserId() + "----------上传头像--------失败" + mUserManager.getVerifycode());
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Log.e("TAG", "----------上传头像--------" + string + mUserManager.getUserId() + "----" + imagePath);
+                }
+            });
+        }
     }
 }
