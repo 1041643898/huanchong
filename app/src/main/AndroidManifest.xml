@@ -27,6 +27,9 @@
         <activity android:name=".homepage.Contact_AddressActivity" />
         <activity android:name=".homepage.QQActivity" />
         <activity android:name=".homepage.WeiXinActivity" />
+
+
+
         <activity android:name=".homepage.OrderActivity" />
         <activity android:name=".FosterfamiliesActivity" />
         <activity android:name=".NewsActivity" />
