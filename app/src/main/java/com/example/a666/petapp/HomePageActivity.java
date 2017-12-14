@@ -27,8 +27,10 @@ import android.widget.Toast;
 import com.example.a666.petapp.adapter.Home_Page_Adapter;
 import com.example.a666.petapp.adapter.PopupAdapter;
 import com.example.a666.petapp.base.BaseActivity;
+
 import com.example.a666.petapp.entity.CJSON;
 import com.example.a666.petapp.entity.Home_FilterBean;
+import com.example.a666.petapp.homepage.OrderActivity;
 import com.example.a666.petapp.homepage.Personal_InformationActivity;
 import com.example.a666.petapp.homepage.PopupButton;
 import com.example.a666.petapp.utils.AppUtils;
@@ -91,6 +93,8 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private TextView personal_dizhi;
     private int page = 1;
     public static final String URL = "http://123.56.150.230:8885/dog_family/";
+    private TextView tv_pet;
+    private DrawerLayout activity_na;
 
 
     //初始化窗口属性，让状态栏和导航栏透明
@@ -149,7 +153,21 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         main_listview = (PullToRefreshListView) findViewById(R.id.main_listview);
 
 
-//----------------------------------------------------------------------------------
+        image_Personage_Centre.setOnClickListener(this);
+        edit_sousuo.setOnClickListener(this);
+        image_Orientation.setOnClickListener(this);
+        linear_Nearby.setOnClickListener(this);
+        linear_Pat_Genre.setOnClickListener(this);
+        linear_ShaiXuan.setOnClickListener(this);
+        linear_name.setOnClickListener(this);
+        linear_Pet.setOnClickListener(this);
+        but_ShenQing.setOnClickListener(this);
+        linear_DingDan.setOnClickListener(this);
+        linear_Xiaoxi.setOnClickListener(this);
+        linear_XunZhi.setOnClickListener(this);
+        linear_QianBao.setOnClickListener(this);
+        linear_SheZhi.setOnClickListener(this);
+
         //3个筛选代码
         PopupButtonPopupWindow();
 
@@ -243,6 +261,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     //----------------------------------------------------------------------------------
 //主页显示
     private String string;
+
 
     private List<Home_FilterBean.DescBean> list;
 
@@ -394,7 +413,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 
             //消息
             case R.id.linear_Xiaoxi:
-
+                startActivity(new Intent(HomePageActivity.this, NewsActivity.class));
                 break;
             //宠物
             case R.id.linear_Pet:
@@ -402,20 +421,28 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 break;
             //订单
             case R.id.linear_DingDan:
-
+                Intent intent1=new Intent(HomePageActivity.this, OrderActivity.class);
+                startActivity(intent1);
                 break;
             //钱包
             case R.id.linear_QianBao:
-
+                Intent intent4=new Intent(HomePageActivity.this, WalletActivity.class);
+                startActivity(intent4);
                 break;
             //须知
             case R.id.linear_XunZhi:
+                Intent intent3=new Intent(HomePageActivity.this, InstructionsActivity.class);
+                startActivity(intent3);
                 break;
-            //设置
+            //
             case R.id.linear_SheZhi:
+                Intent intent5=new Intent(HomePageActivity.this, SettingActivity.class);
+                startActivity(intent5);
                 break;
             //申请成为寄养家庭
             case R.id.but_ShenQing:
+                Intent intent2=new Intent(HomePageActivity.this, FosterfamiliesActivity.class);
+                startActivity(intent2);
                 break;
 
             //重置CheckBox 选中状态
@@ -494,7 +521,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         linear_Pat_Genre.setOnClickListener(this);
         linear_ShaiXuan.setOnClickListener(this);
         image_Orientation.setOnClickListener(this);
-
         but_ShenQing.setOnClickListener(this);
         linear_Pet.setOnClickListener(this);
         linear_DingDan.setOnClickListener(this);
@@ -503,7 +529,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         linear_XunZhi.setOnClickListener(this);
         linear_SheZhi.setOnClickListener(this);
         edit_sousuo.setOnClickListener(this);
-
         personal_xizao.setOnCheckedChangeListener(this);
         personal_jiesong.setOnCheckedChangeListener(this);
         personal_yuandan.setOnCheckedChangeListener(this);
@@ -514,8 +539,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         personal_zhongqiu.setOnCheckedChangeListener(this);
         personal_guoqing.setOnCheckedChangeListener(this);
     }
-
-
     //-----------------------------------------------------------------------------------------------
     //点击两次退出程序
     private static boolean isExit = false;
@@ -526,7 +549,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             isExit = false;
         }
     };
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
@@ -535,7 +557,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
         return super.onKeyDown(keyCode, event);
     }
-
     private void exit() {
         if (!isExit) {
             isExit = true;
@@ -549,4 +570,3 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
     }
 }
-
