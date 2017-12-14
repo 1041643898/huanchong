@@ -1,20 +1,10 @@
 package com.example.a666.petapp.homepage;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,16 +17,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a666.petapp.R;
 import com.example.a666.petapp.base.BaseActivity;
 import com.example.a666.petapp.homepage.date.CustomDatePicker;
+
+import com.example.a666.petapp.homepage.round_imageview.RoundImageView;
+
 import com.example.a666.petapp.homepage.round_imageview.OnBooleanListener;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.lang.ref.WeakReference;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -63,6 +53,8 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
     public final int GET_IMAGE_BY_CAMERA_U = 5001;
     public final int CROP_IMAGE_U = 5003;
 
+    protected static final int CHOOSE_PICTURE = 0;
+
     @Override
     protected void onResume() {
 
@@ -78,6 +70,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         });
         super.onResume();
     }
+
 
     @Override
     protected int getLayoutID() {
@@ -171,6 +164,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 break;
             //手机
             case R.id.linear_Phone:
+                startActivity(new Intent(this, PhoneActivity.class));
                 break;
             //微信
             case R.id.linear_WeiXin:
@@ -284,6 +278,9 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
             @Override
             public void onClick(View view) {
 
+
+
+
                 //Log.d("MainActivity", "进入点击");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {  // 或者 android.os.Build.VERSION_CODES.KITKAT这个常量的值是19
 
@@ -319,6 +316,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                             imageUriFromCamera);
                     startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
                 }
+
                 popupWindow.dismiss();
             }
 
@@ -327,7 +325,6 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         but_Phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 popupWindow.dismiss();
             }
@@ -343,6 +340,8 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         });
 
     }
+
+
 
     private OnBooleanListener onPermissionListener;
 
@@ -439,16 +438,9 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
 
     }
 
-    public void cropImage(Uri imageUri, int aspectX, int aspectY,
-                          int return_flag) {
-        File file = new File(this.getExternalCacheDir(), USER_CROP_IMAGE_NAME);
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            //高版本一定要加上这两句话，做一下临时的Uri
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            FileProvider.getUriForFile(Personal_InformationActivity.this, "com.xuezj.fileproviderdemo.fileprovider", file);
-        }
-        cropImageUri = Uri.fromFile(file);
+
+
+
 
         intent.setDataAndType(imageUri, "image/*");
         intent.putExtra("crop", "true");
@@ -480,4 +472,5 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 BitmapFactory.decodeFile(path, opts));
         return Bitmap.createScaledBitmap(weak.get(), w, h, true);
     }
+
 }

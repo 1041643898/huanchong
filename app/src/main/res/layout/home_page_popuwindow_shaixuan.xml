@@ -5,49 +5,5 @@
     android:background="#fff"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/linear_QQ"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:text="所在地"
-            android:textColor="#3F3F3F"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/tv_chengshi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="选择其他城市"
-            android:textSize="16dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:background="@mipmap/enter" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="21" />
-
-    </LinearLayout>
 </LinearLayout>
