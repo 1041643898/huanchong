@@ -245,7 +245,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 
             //消息
 
-
             case R.id.linear_Xiaoxi:
                 startActivity(new Intent(HomePageActivity.this, NewsActivity.class));
                 break;
