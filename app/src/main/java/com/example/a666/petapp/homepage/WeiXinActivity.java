@@ -16,7 +16,6 @@ public class WeiXinActivity extends BaseActivity implements View.OnClickListener
     private TextView tv_submit;
     private EditText et_name;
 
-
     @Override
     protected int getLayoutID() {
         return R.layout.activity_wei_xin;

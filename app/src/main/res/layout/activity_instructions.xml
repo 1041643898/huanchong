@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp" >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="寄养须知"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:background="#BEBEBE" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="1.寄养的动物必须身体健康,而且要经过免疫。寄养对宠物总是有或多或少的心理影响,突然来到 陌生的环境,多少会有点情绪紧张,也可能会情绪抑郁,甚至导致食欲不振。所以,主人一定要带着宠物前往察看寄养场地,以确定宠物是否喜欢新的居住环境"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="2.此外,宠物可能会因为陌生而发生打斗现象,最好让宠物和新的伙伴们提前接触几天。主人应该向寄养机构提供宠物的食物、每次的食量标准、宠物的喜好等资料,最好把宠物喜欢的玩具带上。年纪太小的动物不适宜寄养,因为幼小的动物抵抗力弱,适应能力低,在寄养场所很容易感染细菌,比较危险"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="3.据宠物医院的工作人员介绍,寄养对宠物来说,或多或少有一些心理影响,尤其是猫、狗。因为它们是群居动物,比较通人性,与主人接触时间长了,突然到一个陌生的环境,肯定会有一些不适的反应,因此寄养时间一般不要超过5天。如果所养的小动物在平时就有过分认生的表现建议还是不要选寄养。因为这期间动物是非常容易生病的,个别宠物还会出现绝食的情况甚至死亡。"
+        />
+
+</LinearLayout>

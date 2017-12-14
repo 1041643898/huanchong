@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,3 +12,108 @@
 
 
 </android.support.constraint.ConstraintLayout>
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的订单"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/main_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#F3F3F3"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/main_rb_jiyangzhong"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+
+            android:gravity="center"
+            android:text="寄养中"
+
+            android:textColor="@drawable/shape_ann"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0.8dp"
+            android:layout_height="25dp"
+            android:background="?android:attr/listDivider" />
+
+        <RadioButton
+            android:id="@+id/main_rb_daiqueren"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@drawable/shape_ann"
+            android:button="@null"
+            android:gravity="center"
+            android:text="待确认"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0.8dp"
+            android:layout_height="25dp"
+            android:background="?android:attr/listDivider" />
+
+        <RadioButton
+            android:id="@+id/main_rb_daipingjia"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:textColor="@drawable/shape_ann"
+            android:text="待评价"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0.8dp"
+            android:layout_height="25dp"
+            android:background="?android:attr/listDivider" />
+
+        <RadioButton
+            android:id="@+id/main_rb_yiwancheng"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textColor="@drawable/shape_ann"
+            android:gravity="center"
+            android:text="已完成"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>
+>>>>>>> origin/master
