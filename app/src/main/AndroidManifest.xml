@@ -33,6 +33,8 @@
         <activity android:name=".homepage.WeiXinActivity" />
 
 
+
+
         <activity android:name=".homepage.city.CityActivity" />
         <!-- 城市筛选 -->
         <activity
@@ -41,6 +43,7 @@
             android:theme="@style/CityPicker.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".homepage.PhoneActivity"></activity>
+
 
         <activity android:name=".homepage.OrderActivity" />
         <activity android:name=".FosterfamiliesActivity" />
@@ -51,6 +54,8 @@
         <activity android:name=".homepage.Setting.SuggestActivity" />
         <activity android:name=".homepage.Setting.MainNewfeatures" />
         <activity android:name=".homepage.Setting.ScoreActivity"></activity>
+
+
 
 
 

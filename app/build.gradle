@@ -35,12 +35,15 @@ dependencies {
     compile 'cn.aigestudio.datepicker:DatePicker:2.2.0'
     compile 'com.github.userswlwork:pull-to-refresh:1.0.0'
 
+
+
     compile 'com.zaaach:citypicker:1.1'
 
 
 
     compile 'com.gjiazhe:wavesidebar:1.0.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+
 
     testCompile 'junit:junit:4.12'
 
