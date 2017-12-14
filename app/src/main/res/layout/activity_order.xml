@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
-    android:orientation="vertical" >
+    android:layout_width="368dp"
+    android:layout_height="551dp"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -31,7 +31,7 @@
         android:layout_height="40dp"
         android:background="#F3F3F3"
         android:gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/main_rb_jiyangzhong"
@@ -56,10 +56,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textColor="@drawable/shape_ann"
             android:button="@null"
             android:gravity="center"
             android:text="待确认"
+            android:textColor="@drawable/shape_ann"
             android:textSize="16sp" />
 
         <View
@@ -74,8 +74,8 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:textColor="@drawable/shape_ann"
             android:text="待评价"
+            android:textColor="@drawable/shape_ann"
             android:textSize="16sp" />
 
         <View
@@ -89,16 +89,15 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
-            android:textColor="@drawable/shape_ann"
             android:gravity="center"
             android:text="已完成"
+            android:textColor="@drawable/shape_ann"
             android:textSize="16sp" />
     </RadioGroup>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
 </LinearLayout>

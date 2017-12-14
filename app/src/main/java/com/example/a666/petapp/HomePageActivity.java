@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.a666.petapp.adapter.Home_Page_Adapter;
 import com.example.a666.petapp.adapter.PopupAdapter;
 import com.example.a666.petapp.base.BaseActivity;
+
 import com.example.a666.petapp.entity.CJSON;
 import com.example.a666.petapp.entity.Home_FilterBean;
 import com.example.a666.petapp.homepage.OrderActivity;
@@ -49,6 +50,16 @@ import okhttp3.Response;
 public class HomePageActivity extends BaseActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
+
+import com.example.a666.petapp.homepage.Personal_InformationActivity;
+import com.example.a666.petapp.homepage.PopupButton;
+import com.example.a666.petapp.mypet.MyPetActivity;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+public class HomePageActivity extends BaseActivity implements View.OnClickListener {
+
+
+
     private ImageView image_Personage_Centre;
     private EditText edit_sousuo;
     private ImageView image_Orientation;
@@ -72,6 +83,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private DrawerLayout drawerLayout;
     private LinearLayout liner_nav;
     private PullToRefreshListView main_listview;
+
     private PopupWindow popupWindow;
     private CheckBox personal_xizao;
     private CheckBox personal_jiesong;
@@ -90,6 +102,8 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     public static final String URL = "http://123.56.150.230:8885/dog_family/";
     private TextView tv_pet;
     private DrawerLayout activity_na;
+
+
 
 
     //初始化窗口属性，让状态栏和导航栏透明
@@ -155,6 +169,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         linear_Pat_Genre.setOnClickListener(this);
         linear_ShaiXuan.setOnClickListener(this);
         linear_name.setOnClickListener(this);
+
         linear_Pet.setOnClickListener(this);
         but_ShenQing.setOnClickListener(this);
         linear_DingDan.setOnClickListener(this);
@@ -169,6 +184,9 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void PopupButtonPopupWindow() {
+
+//----------------------------------------------------------------------------------
+
         popu_but_nearby = (PopupButton) findViewById(R.id.popu_but_nearby);
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.popup, null);
@@ -258,9 +276,14 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private String string;
 
 
+
     private List<Home_FilterBean.DescBean> list;
 
     @Override
+
+
+@Override
+
     protected void initDate() {
         //主页的ListView 展示
         HomeListView();
@@ -408,36 +431,29 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 
             //消息
             case R.id.linear_Xiaoxi:
-                startActivity(new Intent(HomePageActivity.this, NewsActivity.class));
+
                 break;
             //宠物
             case R.id.linear_Pet:
+                startActivity(new Intent(HomePageActivity.this, MyPetActivity.class));
 
                 break;
             //订单
             case R.id.linear_DingDan:
-                Intent intent1=new Intent(HomePageActivity.this, OrderActivity.class);
-                startActivity(intent1);
+
                 break;
             //钱包
             case R.id.linear_QianBao:
-                Intent intent4=new Intent(HomePageActivity.this, WalletActivity.class);
-                startActivity(intent4);
+
                 break;
             //须知
             case R.id.linear_XunZhi:
-                Intent intent3=new Intent(HomePageActivity.this, InstructionsActivity.class);
-                startActivity(intent3);
                 break;
-            //
+            //设置
             case R.id.linear_SheZhi:
-                Intent intent5=new Intent(HomePageActivity.this, SettingActivity.class);
-                startActivity(intent5);
                 break;
             //申请成为寄养家庭
             case R.id.but_ShenQing:
-                Intent intent2=new Intent(HomePageActivity.this, FosterfamiliesActivity.class);
-                startActivity(intent2);
                 break;
 
             //重置CheckBox 选中状态
@@ -564,4 +580,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             System.exit(0);
         }
     }
+
+
 }
