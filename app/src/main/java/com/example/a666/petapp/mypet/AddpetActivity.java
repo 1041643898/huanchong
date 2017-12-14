@@ -91,7 +91,6 @@ public class AddpetActivity extends BaseActivity implements View.OnClickListener
     protected static final int CHOOSE_PICTURE = 0;
     private ImageView imageView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
