@@ -243,7 +243,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(HomePageActivity.this, Personal_InformationActivity.class));
                 break;
 
-            //消息嗯嗯我去消息
+            //消息
             case R.id.linear_Xiaoxi:
                 startActivity(new Intent(HomePageActivity.this, NewsActivity.class));
                 break;
