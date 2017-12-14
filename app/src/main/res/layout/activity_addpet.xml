@@ -20,19 +20,19 @@
             android:src="@mipmap/back_gray" />
 
         <TextView
-            android:layout_weight="1"
             android:layout_width="322dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="添加宠物"
             android:textSize="20dp" />
 
         <TextView
             android:id="@+id/addpet_keep"
-            android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:text="保存"
             android:textSize="20dp" />
     </LinearLayout>
@@ -46,17 +46,16 @@
 
         android:id="@+id/headportrait"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="80dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-              android:layout_margin="20dp"
+             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:text="头像"
-             />
+            android:text="头像" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -65,8 +64,7 @@
 
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/pet"
-             />
+            android:src="@mipmap/pet" />
 
         <ImageView
 
@@ -77,6 +75,7 @@
 
             />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -94,14 +93,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="昵称"
-             />
+            android:text="昵称" />
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@mipmap/enter" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -109,9 +108,9 @@
 
     <LinearLayout
         android:id="@+id/addpet_pettype"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
@@ -119,24 +118,24 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="宠物类型"
-       />
+            android:text="宠物类型" />
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@mipmap/enter" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#ececdd"></View>
 
     <LinearLayout
-        android:gravity="center"
         android:id="@+id/addpet_ifsterilization"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
@@ -144,14 +143,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="是否绝育"
-         />
+            android:text="是否绝育" />
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@mipmap/enter" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -160,8 +159,8 @@
     <LinearLayout
         android:id="@+id/addpet_dateofbirth"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="50dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
@@ -169,8 +168,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="出生日期"
-            />
+            android:text="出生日期" />
+
         <TextView
             android:id="@+id/tv_Date"
 
@@ -182,6 +181,7 @@
             android:layout_height="20dp"
             android:src="@mipmap/enter" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -190,8 +190,8 @@
     <LinearLayout
         android:id="@+id/addpet_weight"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="50dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
@@ -199,14 +199,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="体重"
-            />
+            android:text="体重" />
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@mipmap/enter" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -215,24 +215,22 @@
     <LinearLayout
         android:id="@+id/addpet_immune"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="50dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="免疫情况"
-             />
+            android:text="免疫情况" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="未完善信息"
-            />
+            android:text="未完善信息" />
 
         <ImageView
             android:layout_width="20dp"
@@ -254,18 +252,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="宠物简介"
-            android:layout_gravity="center_vertical"
-            />
+            android:text="宠物简介" />
 
     </LinearLayout>
 
     <EditText
-        android:background="@drawable/shape"
         android:layout_width="match_parent"
-        android:gravity="top"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:gravity="top" />
 
 </LinearLayout>
