@@ -1,10 +1,291 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15px"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="所在地" />
+
+        <TextView
+            android:id="@+id/personal_tiaozhuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择其他城市" />
+
+        <ImageView
+            android:layout_width="35px"
+
+            android:layout_height="35px"
+            android:background="@mipmap/enter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="100px"
+            android:layout_marginLeft="15px"
+            android:layout_weight="1"
+            android:background="#FFD0"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8px">
+
+            <ImageView
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_marginRight="5px"
+                android:src="@mipmap/location" />
+
+            <TextView
+                android:id="@+id/personal_dizhi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5px"
+                android:text="北京" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15px"
+            android:layout_weight="1"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15px"
+            android:layout_weight="1"></LinearLayout>
+    </LinearLayout>
 
     <TextView
-        android:text="选择其他城市"
+        android:layout_width="match_parent"
+        android:layout_height="0.01px"
+        android:layout_marginTop="15px"
+        android:background="#a0786868" />
+
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="15px"
+        android:text="其他服务" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <CheckBox
+            android:id="@+id/personal_xizao"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:layout_margin="15px"
+            android:background="@drawable/item_home_popuwiondw"
+            android:button="@null"
+            android:buttonTint="@color/color6"
+            android:checked="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="洗澡" />
+
+        <CheckBox
+            android:id="@+id/personal_jiesong"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:layout_margin="15px"
+            android:background="@drawable/item_home_popuwiondw"
+            android:button="@null"
+            android:buttonTint="#1234"
+            android:checked="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="接/送" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.01px"
+        android:layout_marginTop="15px"
+        android:background="#a0786868" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15px"
+        android:text="节日筛选" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/personal_yuandan"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:layout_margin="20px"
+            android:background="@drawable/item_home_popuwiondw"
+            android:button="@null"
+            android:buttonTint="#1234"
+            android:checked="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="元旦可接送" />
+
+        <CheckBox
+            android:id="@+id/personal_cunjie"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:layout_margin="20px"
+            android:background="@drawable/item_home_popuwiondw"
+            android:button="@null"
+            android:buttonTint="@color/color6"
+            android:checked="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="春节可接送" />
+
+        <CheckBox
+            android:id="@+id/personal_qingming"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:layout_margin="20px"
+            android:background="@drawable/item_home_popuwiondw"
+            android:button="@null"
+            android:buttonTint="@color/color6"
+            android:checked="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="清明节接送" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/personal_laodong"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:layout_margin="20px"
+            android:background="@drawable/item_home_popuwiondw"
+            android:button="@null"
+            android:buttonTint="@color/color6"
+            android:checked="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="劳动节接送" />
+
+        <CheckBox
+            android:id="@+id/personal_duanwu"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:layout_margin="20px"
+            android:background="@drawable/item_home_popuwiondw"
+            android:button="@null"
+            android:buttonTint="@color/color6"
+            android:checked="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="端午节接送" />
+
+        <CheckBox
+            android:id="@+id/personal_zhongqiu"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:layout_margin="20px"
+            android:background="@drawable/item_home_popuwiondw"
+            android:button="@null"
+            android:buttonTint="@color/color6"
+            android:checked="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="中秋节接送" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/personal_guoqing"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:layout_margin="20px"
+            android:background="@drawable/item_home_popuwiondw"
+            android:button="@null"
+            android:buttonTint="@color/color6"
+            android:checked="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="国庆节接送" />
+
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_height="60px"
+            android:layout_margin="15px"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="" />
+
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_height="60px"
+            android:layout_margin="15px"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+
+            android:text="" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.01px"
+        android:layout_marginTop="15px"
+        android:background="#a0786868" />
+
+    <Button
+        android:id="@+id/personal_chongzhi"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30px"
+        android:text="重置" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/personal_queding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:background="@color/color6"
+        android:text="确定" />
 </LinearLayout>

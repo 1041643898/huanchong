@@ -37,6 +37,7 @@
 
 
                 <EditText
+                    android:textCursorDrawable="@null"
                     android:id="@+id/edit_sousuo"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -118,18 +119,18 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <com.example.a666.petapp.homepage.PopupButton
+                <CheckBox
+
                     android:id="@+id/popu_but_ShaiXuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:button="@null"
                     android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/item_filter_arrow"
                     android:gravity="center"
                     android:text="筛选"
-                    android:textSize="15sp"
-                    popupbtn:normalIcon="@mipmap/down_arrow"
-                    popupbtn:pressIcon="@mipmap/up_arrow" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -140,6 +141,7 @@
             android:layout_height="match_parent">
 
             <com.handmark.pulltorefresh.library.PullToRefreshListView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/main_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -328,15 +330,14 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-       ></View>
+            android:layout_height="10dp"></View>
+
         <LinearLayout
             android:id="@+id/linear_SheZhi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -352,10 +353,11 @@
                 android:text="设置" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            ></View>
+            android:layout_height="10dp"></View>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
