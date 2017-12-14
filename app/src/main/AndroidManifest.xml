@@ -27,6 +27,15 @@
         <activity android:name=".homepage.Contact_AddressActivity" />
         <activity android:name=".homepage.QQActivity" />
         <activity android:name=".homepage.WeiXinActivity" />
+        <activity android:name=".homepage.OrderActivity" />
+        <activity android:name=".FosterfamiliesActivity" />
+        <activity android:name=".NewsActivity" />
+        <activity android:name=".WalletActivity" />
+        <activity android:name=".InstructionsActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".homepage.Setting.SuggestActivity" />
+        <activity android:name=".homepage.Setting.MainNewfeatures" />
+        <activity android:name=".homepage.Setting.ScoreActivity"></activity>
     </application>
 
 </manifest>

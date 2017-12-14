@@ -20,13 +20,12 @@ import android.widget.Toast;
 
 import com.example.a666.petapp.adapter.PopupAdapter;
 import com.example.a666.petapp.base.BaseActivity;
+import com.example.a666.petapp.homepage.OrderActivity;
 import com.example.a666.petapp.homepage.Personal_InformationActivity;
 import com.example.a666.petapp.homepage.PopupButton;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class HomePageActivity extends BaseActivity implements View.OnClickListener {
-
-
 
     private ImageView image_Personage_Centre;
     private EditText edit_sousuo;
@@ -68,6 +67,8 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private DrawerLayout drawerLayout;
     private LinearLayout liner_nav;
     private PullToRefreshListView main_listview;
+    private TextView tv_pet;
+    private DrawerLayout activity_na;
 
 
     @Override
@@ -153,6 +154,13 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         linear_Pat_Genre.setOnClickListener(this);
         linear_ShaiXuan.setOnClickListener(this);
         linear_name.setOnClickListener(this);
+        linear_Pet.setOnClickListener(this);
+        but_ShenQing.setOnClickListener(this);
+        linear_DingDan.setOnClickListener(this);
+        linear_Xiaoxi.setOnClickListener(this);
+        linear_XunZhi.setOnClickListener(this);
+        linear_QianBao.setOnClickListener(this);
+        linear_SheZhi.setOnClickListener(this);
 //----------------------------------------------------------------------------------
         popu_but_nearby = (PopupButton) findViewById(R.id.popu_but_nearby);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -197,8 +205,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     //----------------------------------------------------------------------------------
 
 
-
-@Override
+    @Override
     protected void initDate() {
 
     }
@@ -238,7 +245,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 
             //消息
             case R.id.linear_Xiaoxi:
-
+                startActivity(new Intent(HomePageActivity.this, NewsActivity.class));
                 break;
             //宠物
             case R.id.linear_Pet:
@@ -246,26 +253,32 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 break;
             //订单
             case R.id.linear_DingDan:
-
+                Intent intent1=new Intent(HomePageActivity.this, OrderActivity.class);
+                startActivity(intent1);
                 break;
             //钱包
             case R.id.linear_QianBao:
-
+                Intent intent4=new Intent(HomePageActivity.this, WalletActivity.class);
+                startActivity(intent4);
                 break;
             //须知
             case R.id.linear_XunZhi:
+                Intent intent3=new Intent(HomePageActivity.this, InstructionsActivity.class);
+                startActivity(intent3);
                 break;
-            //设置
+            //
             case R.id.linear_SheZhi:
+                Intent intent5=new Intent(HomePageActivity.this, SettingActivity.class);
+                startActivity(intent5);
                 break;
             //申请成为寄养家庭
             case R.id.but_ShenQing:
+                Intent intent2=new Intent(HomePageActivity.this, FosterfamiliesActivity.class);
+                startActivity(intent2);
                 break;
 
 
         }
 
     }
-
-
 }
