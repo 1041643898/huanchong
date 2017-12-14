@@ -107,6 +107,7 @@ public class Home_Page_Adapter extends BaseAdapter {
 //                && !list.get(position).getCoordX().isEmpty()
 //                && !list.get(position).getCoordY().isEmpty()) {
 //
+
 //            LatLng startLatlng = new LatLng(Double.parseDouble(list.get(
 //                    position).getCoordX()), Double.parseDouble(list.get(
 //                    position).getCoordY()));
