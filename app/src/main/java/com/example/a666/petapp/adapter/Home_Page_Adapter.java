@@ -119,6 +119,7 @@ public class Home_Page_Adapter extends BaseAdapter {
 //            Log.d("TAG", ssFloat + "++++++++++++++++++++");
 //            holder.tv_location.setText("距 " + (Math.round(ssFloat / 1000))
 //                    + " km");
+
 //            if (ssFloat <= 1) {
 //                holder.tv_location.setText("距 " + 1 + " km");
 //            }
