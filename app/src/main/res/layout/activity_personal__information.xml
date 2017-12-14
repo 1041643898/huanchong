@@ -244,6 +244,7 @@
                 android:textColor="#3F3F3F"
                 android:textSize="16dp" />
 
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -390,4 +391,4 @@
             android:layout_height="match_parent"
             android:background="#F0f1f5"></View>
     </LinearLayout>
-    </LinearLayout>
+</LinearLayout>

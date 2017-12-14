@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 这里的value要替换成你项目的 -->
+    <meta-data
+        android:name="com.amap.api.v2.apikey"
+        android:value="138e5cf1e8961ae326ff0908c03d1ae1" />
 
     <application
         android:name=".app.MyApplication"
@@ -27,6 +31,14 @@
         <activity android:name=".homepage.Contact_AddressActivity" />
         <activity android:name=".homepage.QQActivity" />
         <activity android:name=".homepage.WeiXinActivity" />
+        <activity android:name=".homepage.city.CityActivity" />
+        <!-- 城市筛选 -->
+        <activity
+            android:name="com.zaaach.citypicker.CityPickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CityPicker.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".homepage.PhoneActivity"></activity>
     </application>
 
 </manifest>
