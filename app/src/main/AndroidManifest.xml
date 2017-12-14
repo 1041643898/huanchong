@@ -31,7 +31,7 @@
         <activity android:name=".homepage.Contact_AddressActivity" />
         <activity android:name=".homepage.QQActivity" />
         <activity android:name=".homepage.WeiXinActivity" />
-<<<<<<< HEAD
+
         <activity android:name=".homepage.city.CityActivity" />
         <!-- 城市筛选 -->
         <activity
@@ -40,7 +40,7 @@
             android:theme="@style/CityPicker.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".homepage.PhoneActivity"></activity>
-=======
+
         <activity android:name=".homepage.OrderActivity" />
         <activity android:name=".FosterfamiliesActivity" />
         <activity android:name=".NewsActivity" />
@@ -50,7 +50,7 @@
         <activity android:name=".homepage.Setting.SuggestActivity" />
         <activity android:name=".homepage.Setting.MainNewfeatures" />
         <activity android:name=".homepage.Setting.ScoreActivity"></activity>
->>>>>>> 4851c5db277805ae79c36e1643e409222ffce3f6
+
     </application>
 
 </manifest>

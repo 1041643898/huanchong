@@ -1,5 +1,4 @@
 package com.example.a666.petapp;
-
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -23,11 +22,9 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.a666.petapp.adapter.Home_Page_Adapter;
 import com.example.a666.petapp.adapter.PopupAdapter;
 import com.example.a666.petapp.base.BaseActivity;
-
 import com.example.a666.petapp.entity.CJSON;
 import com.example.a666.petapp.entity.Home_FilterBean;
 import com.example.a666.petapp.homepage.OrderActivity;
@@ -38,12 +35,10 @@ import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.zaaach.citypicker.CityPickerActivity;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
