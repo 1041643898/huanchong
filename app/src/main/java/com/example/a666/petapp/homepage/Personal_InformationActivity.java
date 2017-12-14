@@ -1,10 +1,20 @@
 package com.example.a666.petapp.homepage;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,12 +27,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a666.petapp.R;
 import com.example.a666.petapp.base.BaseActivity;
 import com.example.a666.petapp.homepage.date.CustomDatePicker;
+import com.example.a666.petapp.homepage.round_imageview.OnBooleanListener;
 import com.example.a666.petapp.homepage.round_imageview.RoundImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -48,8 +63,6 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
     public Uri cropImageUri;
     public final int GET_IMAGE_BY_CAMERA_U = 5001;
     public final int CROP_IMAGE_U = 5003;
-    protected static final int CHOOSE_PICTURE = 0;
-
     @Override
     protected int getLayoutID() {
         return R.layout.activity_personal__information;
@@ -142,7 +155,6 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 break;
             //手机
             case R.id.linear_Phone:
-                startActivity(new Intent(this, PhoneActivity.class));
                 break;
             //微信
             case R.id.linear_WeiXin:
@@ -253,7 +265,41 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         but_pai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Log.d("MainActivity", "进入点击");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {  // 或者 android.os.Build.VERSION_CODES.KITKAT这个常量的值是19
 
+                    onPermissionRequests(Manifest.permission.CAMERA, new OnBooleanListener() {
+                        @Override
+                        public void onClick(boolean bln) {
+                            if (bln) {
+                                Log.d("MainActivity", "进入权限");
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                File photoFile = createImagePathFile(Personal_InformationActivity.this);
+                                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                                /*
+                                * 这里就是高版本需要注意的，需用使用FileProvider来获取Uri，同时需要注意getUriForFile
+                                * 方法第二个参数要与AndroidManifest.xml中provider的里面的属性authorities的值一致
+                                * */
+                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                imageUriFromCamera = FileProvider.getUriForFile(Personal_InformationActivity.this,
+                                        "com.xuezj.fileproviderdemo.fileprovider", photoFile);
+                                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriFromCamera);
+
+                                startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
+                            } else {
+                                Toast.makeText(Personal_InformationActivity.this, "扫码拍照或无法正常使用", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                } else {
+                    imageUriFromCamera = createImagePathUri(Personal_InformationActivity.this);
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                            imageUriFromCamera);
+                    startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
+                }
 
                 popupWindow.dismiss();
             }
@@ -261,6 +307,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         but_Phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 popupWindow.dismiss();
             }
@@ -276,6 +323,142 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         });
 
     }
+    public Uri createImagePathUri(Activity activity) {
+        //文件目录可以根据自己的需要自行定义
+        Uri imageFilePath;
+        File file = new File(activity.getExternalCacheDir(), USER_IMAGE_NAME);
+        imageFilePath = Uri.fromFile(file);
+        return imageFilePath;
+    }
+
+    public File createImagePathFile(Activity activity) {
+        //文件目录可以根据自己的需要自行定义
+        Uri imageFilePath;
+        File file = new File(activity.getExternalCacheDir(), USER_IMAGE_NAME);
+        imageFilePath = Uri.fromFile(file);
+        return file;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println(requestCode);
+        System.out.println("数据" + resultCode + "" + this.RESULT_OK);
+        if (resultCode != this.RESULT_CANCELED) {
+            switch (requestCode) {
+                case GET_IMAGE_BY_CAMERA_U:
+                    /*
+                    * 这里我做了一下调用系统切图，高版本也有需要注意的地方
+                    * */
+                    if (imageUriFromCamera != null) {
+                        cropImage(imageUriFromCamera, 1, 1, CROP_IMAGE_U);
+                        break;
+                    }
+                    break;
+                case CROP_IMAGE_U:
+                    final String s = getExternalCacheDir() + "/" + USER_CROP_IMAGE_NAME;
+
+                    Bitmap imageBitmap = GetBitmap(s, 320, 320);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.PNG, 70, baos);
+                    image_icon.setImageBitmap(imageBitmap);
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    public void cropImage(Uri imageUri, int aspectX, int aspectY,
+                          int return_flag) {
+        File file = new File(this.getExternalCacheDir(), USER_CROP_IMAGE_NAME);
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //高版本一定要加上这两句话，做一下临时的Uri
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            FileProvider.getUriForFile(Personal_InformationActivity.this, "com.xuezj.fileproviderdemo.fileprovider", file);
+        }
+        cropImageUri = Uri.fromFile(file);
+
+        intent.setDataAndType(imageUri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", aspectX);
+        intent.putExtra("aspectY", aspectY);
+        intent.putExtra("outputX", 320);
+        intent.putExtra("outputY", 320);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, cropImageUri);
+
+        startActivityForResult(intent, return_flag);
+    }
+
+    public Bitmap GetBitmap(String path, int w, int h) {
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inJustDecodeBounds = true;
+        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        BitmapFactory.decodeFile(path, opts);
+        int width = opts.outWidth;
+        int height = opts.outHeight;
+        float scaleWidth = 0.f, scaleHeight = 0.f;
+        if (width > w || height > h) {
+            scaleWidth = ((float) width) / w;
+            scaleHeight = ((float) height) / h;
+        }
+        opts.inJustDecodeBounds = false;
+        float scale = Math.max(scaleWidth, scaleHeight);
+        opts.inSampleSize = (int) scale;
+        WeakReference<Bitmap> weak = new WeakReference<Bitmap>(
+                BitmapFactory.decodeFile(path, opts));
+        return Bitmap.createScaledBitmap(weak.get(), w, h, true);
+    }
+    private OnBooleanListener onPermissionListener;
 
 
+
+    public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
+        onPermissionListener = onBooleanListener;
+        Log.d("MainActivity", "0");
+        if (ContextCompat.checkSelfPermission(this,
+                permission)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Should we show an explanation?
+            Log.d("MainActivity", "1");
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+                //权限已有
+                onPermissionListener.onClick(true);
+            } else {
+                //没有权限，申请一下
+                ActivityCompat.requestPermissions(this,
+                        new String[]{permission},
+                        1);
+            }
+        }else{
+            onPermissionListener.onClick(true);
+            Log.d("MainActivity", "2"+ ContextCompat.checkSelfPermission(this,
+                    permission));
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //权限通过
+                if (onPermissionListener != null) {
+                    onPermissionListener.onClick(true);
+                }
+            } else {
+                //权限拒绝
+                if (onPermissionListener != null) {
+                    onPermissionListener.onClick(false);
+                }
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 }
