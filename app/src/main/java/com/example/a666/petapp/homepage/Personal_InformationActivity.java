@@ -33,7 +33,6 @@ import com.example.a666.petapp.R;
 import com.example.a666.petapp.base.BaseActivity;
 import com.example.a666.petapp.homepage.date.CustomDatePicker;
 import com.example.a666.petapp.homepage.round_imageview.OnBooleanListener;
-import com.example.a666.petapp.homepage.round_imageview.RoundImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,8 +41,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+
 public class Personal_InformationActivity extends BaseActivity implements View.OnClickListener {
-    private RoundImageView image_icon;
+    private ImageView image_icon;
     private LinearLayout linear_Name;
     private LinearLayout liner_Gender;
     private TextView tv_Gender;
@@ -63,6 +63,24 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
     public Uri cropImageUri;
     public final int GET_IMAGE_BY_CAMERA_U = 5001;
     public final int CROP_IMAGE_U = 5003;
+    protected static final int CHOOSE_PICTURE = 0;
+
+    @Override
+    protected void onResume() {
+
+        onPermissionRequests(Manifest.permission.WRITE_EXTERNAL_STORAGE, new OnBooleanListener() {
+            @Override
+            public void onClick(boolean bln) {
+                if (bln) {
+
+                } else {
+                    Toast.makeText(Personal_InformationActivity.this, "文件读写或无法正常使用", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        super.onResume();
+    }
+
     @Override
     protected int getLayoutID() {
         return R.layout.activity_personal__information;
@@ -73,7 +91,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         //退出界面
         image_Pull_out = (ImageView) findViewById(R.id.image_Pull_out);
         //上传头像
-        image_icon = (RoundImageView) findViewById(R.id.image_icon);
+        image_icon = (ImageView) findViewById(R.id.image_icon);
 
         //设置名字
         linear_Name = (LinearLayout) findViewById(R.id.linear_Name);
@@ -155,6 +173,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 break;
             //手机
             case R.id.linear_Phone:
+                startActivity(new Intent(this, PhoneActivity.class));
                 break;
             //微信
             case R.id.linear_WeiXin:
@@ -170,6 +189,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 break;
         }
     }
+
     //出生日期
 
     private void ShowDate_of_Birth() {
@@ -239,6 +259,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
 
     }
 
+
     // PopupWindow   头像上传
     private void ShowPopupWindow_Icon(View view) {
         view = LayoutInflater.from(Personal_InformationActivity.this).inflate(R.layout.popupwindow_icon, null);
@@ -265,6 +286,8 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         but_pai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 //Log.d("MainActivity", "进入点击");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {  // 或者 android.os.Build.VERSION_CODES.KITKAT这个常量的值是19
 
@@ -283,7 +306,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                                 * */
                                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 imageUriFromCamera = FileProvider.getUriForFile(Personal_InformationActivity.this,
-                                        "com.xuezj.fileproviderdemo.fileprovider", photoFile);
+                                        "com.example.a666.petapp.fileprovider", photoFile);
                                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriFromCamera);
 
                                 startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
@@ -300,14 +323,14 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                             imageUriFromCamera);
                     startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
                 }
-
                 popupWindow.dismiss();
             }
+
+
         });
         but_Phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 popupWindow.dismiss();
             }
@@ -323,6 +346,52 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         });
 
     }
+
+    private OnBooleanListener onPermissionListener;
+
+    public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
+        onPermissionListener = onBooleanListener;
+        Log.d("MainActivity", "0");
+        if (ContextCompat.checkSelfPermission(this, permission)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Should we show an explanation?
+            Log.d("MainActivity", "1");
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+                //权限已有
+                onPermissionListener.onClick(true);
+            } else {
+                //没有权限，申请一下
+                ActivityCompat.requestPermissions(this,
+                        new String[]{permission},
+                        1);
+            }
+        } else {
+            onPermissionListener.onClick(true);
+            Log.d("MainActivity", "2" + ContextCompat.checkSelfPermission(this,
+                    permission));
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //权限通过
+                if (onPermissionListener != null) {
+                    onPermissionListener.onClick(true);
+                }
+            } else {
+                //权限拒绝
+                if (onPermissionListener != null) {
+                    onPermissionListener.onClick(false);
+                }
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
     public Uri createImagePathUri(Activity activity) {
         //文件目录可以根据自己的需要自行定义
         Uri imageFilePath;
@@ -372,7 +441,6 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         }
 
     }
-
     public void cropImage(Uri imageUri, int aspectX, int aspectY,
                           int return_flag) {
         File file = new File(this.getExternalCacheDir(), USER_CROP_IMAGE_NAME);
@@ -395,6 +463,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         startActivityForResult(intent, return_flag);
     }
 
+
     public Bitmap GetBitmap(String path, int w, int h) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inJustDecodeBounds = true;
@@ -413,52 +482,5 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         WeakReference<Bitmap> weak = new WeakReference<Bitmap>(
                 BitmapFactory.decodeFile(path, opts));
         return Bitmap.createScaledBitmap(weak.get(), w, h, true);
-    }
-    private OnBooleanListener onPermissionListener;
-
-
-
-    public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
-        onPermissionListener = onBooleanListener;
-        Log.d("MainActivity", "0");
-        if (ContextCompat.checkSelfPermission(this,
-                permission)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Should we show an explanation?
-            Log.d("MainActivity", "1");
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
-                //权限已有
-                onPermissionListener.onClick(true);
-            } else {
-                //没有权限，申请一下
-                ActivityCompat.requestPermissions(this,
-                        new String[]{permission},
-                        1);
-            }
-        }else{
-            onPermissionListener.onClick(true);
-            Log.d("MainActivity", "2"+ ContextCompat.checkSelfPermission(this,
-                    permission));
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 1) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //权限通过
-                if (onPermissionListener != null) {
-                    onPermissionListener.onClick(true);
-                }
-            } else {
-                //权限拒绝
-                if (onPermissionListener != null) {
-                    onPermissionListener.onClick(false);
-                }
-            }
-            return;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

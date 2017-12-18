@@ -4,25 +4,40 @@
     android:layout_height="match_parent"
     android:layout_marginTop="20dp"
     android:orientation="vertical" >
-    <LinearLayout
-        android:orientation="horizontal"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="25dp">
-        <ImageView
-            android:id="@+id/img_tuichu"
-            android:src="@mipmap/back_gray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="设置"
-            android:textSize="15dp"
-            android:textColor="#000"
-            android:gravity="center"
+        android:layout_height="wrap_content"
+        android:background="#F9F9F9">
+        <!--android:fitsSystemWindows="true"-->
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/img_tuichu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/back_gray" />
+
+
+            <TextView
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="设置"
+                android:textSize="20dp" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,9 +48,9 @@
             android:id="@+id/rl_productproposal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp" >
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp" >
 
             <ImageView
                 android:id="@+id/imageView1"
@@ -59,7 +74,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/imageView1"
                 android:text="产品建议"
-                android:textSize="15dp" />
+                android:textSize="17dp" />
         </RelativeLayout>
 
         <View
@@ -71,9 +86,9 @@
             android:id="@+id/rl_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp" >
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -97,7 +112,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/imageView2"
                 android:text="新功能介绍"
-                android:textSize="15dp" />
+                android:textSize="17dp" />
         </RelativeLayout>
 
         <View
@@ -109,9 +124,9 @@
             android:id="@+id/recy_pingfen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp" >
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -147,9 +162,9 @@
             android:id="@+id/rl_updateguan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp" >
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -187,8 +202,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="5dp" >
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp" >
 
             <ImageView
                 android:id="@+id/imageView11"
@@ -228,9 +244,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp" >
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/imageView12"
@@ -274,9 +290,9 @@
             android:id="@+id/rl_clear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp" >
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/imageView13"
