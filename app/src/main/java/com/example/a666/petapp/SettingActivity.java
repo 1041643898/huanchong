@@ -12,7 +12,7 @@ import com.example.a666.petapp.base.BaseActivity;
 import com.example.a666.petapp.homepage.Setting.MainNewfeatures;
 import com.example.a666.petapp.homepage.Setting.ScoreActivity;
 import com.example.a666.petapp.homepage.Setting.SuggestActivity;
-
+//设置
 public class SettingActivity extends BaseActivity {
 
     private ImageView img_tuichu;

@@ -19,13 +19,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomePageActivity">
+        <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".HomePageActivity"/>
         <activity android:name=".homepage.Personal_InformationActivity" />
         <activity android:name=".homepage.Modif_NameActivity" />
         <activity android:name=".homepage.Contact_AddressActivity" />
@@ -44,7 +47,6 @@
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".homepage.PhoneActivity"></activity>
 
-
         <activity android:name=".homepage.OrderActivity" />
         <activity android:name=".FosterfamiliesActivity" />
         <activity android:name=".NewsActivity" />
@@ -54,7 +56,14 @@
         <activity android:name=".homepage.Setting.SuggestActivity" />
         <activity android:name=".homepage.Setting.MainNewfeatures" />
         <activity android:name=".homepage.Setting.ScoreActivity"></activity>
-
+        <activity android:name=".mypet.AddpetActivity" />
+        <activity android:name=".mypet.PetTypeActivity" />
+        <activity android:name=".order.CloseActivity" />
+        <activity android:name=".mypet.pet.AddpetnameActivity" />
+        <activity android:name=".mypet.MyPetActivity" />
+        <activity android:name=".mypet.ImmuneActivity" />
+        <activity android:name=".mypet.IfsterilizationActivity" />
+        <activity android:name=".mypet.pet.AddweightActivity" />
 
 
 

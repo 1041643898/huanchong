@@ -25,15 +25,15 @@ import com.example.a666.petapp.homepage.date.CustomDatePicker;
 import com.example.a666.petapp.homepage.round_imageview.RoundImageView;
 
 import com.example.a666.petapp.homepage.round_imageview.OnBooleanListener;
-import com.example.a666.petapp.homepage.round_imageview.RoundImageView;
 
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+
 public class Personal_InformationActivity extends BaseActivity implements View.OnClickListener {
-    private RoundImageView image_icon;
+    private ImageView image_icon;
     private LinearLayout linear_Name;
     private LinearLayout liner_Gender;
     private TextView tv_Gender;
@@ -85,7 +85,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         //退出界面
         image_Pull_out = (ImageView) findViewById(R.id.image_Pull_out);
         //上传头像
-        image_icon = (RoundImageView) findViewById(R.id.image_icon);
+        image_icon = (ImageView) findViewById(R.id.image_icon);
 
         //设置名字
         linear_Name = (LinearLayout) findViewById(R.id.linear_Name);
@@ -183,6 +183,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 break;
         }
     }
+
     //出生日期
 
     private void ShowDate_of_Birth() {
@@ -252,6 +253,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
 
     }
 
+
     // PopupWindow   头像上传
     private void ShowPopupWindow_Icon(View view) {
         view = LayoutInflater.from(Personal_InformationActivity.this).inflate(R.layout.popupwindow_icon, null);
@@ -303,7 +305,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                                 * */
                                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 imageUriFromCamera = FileProvider.getUriForFile(Personal_InformationActivity.this,
-                                        "com.xuezj.fileproviderdemo.fileprovider", photoFile);
+                                        "com.example.a666.petapp.fileprovider", photoFile);
                                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriFromCamera);
 
                                 startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
@@ -320,9 +322,10 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                             imageUriFromCamera);
                     startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
                 }
-
                 popupWindow.dismiss();
             }
+
+
         });
         but_Phone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -392,7 +395,6 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-
     public Uri createImagePathUri(Activity activity) {
         //文件目录可以根据自己的需要自行定义
         Uri imageFilePath;
@@ -442,8 +444,16 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         }
 
     }
-
-
+    public void cropImage(Uri imageUri, int aspectX, int aspectY,
+                          int return_flag) {
+        File file = new File(this.getExternalCacheDir(), USER_CROP_IMAGE_NAME);
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //高版本一定要加上这两句话，做一下临时的Uri
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            FileProvider.getUriForFile(Personal_InformationActivity.this, "com.xuezj.fileproviderdemo.fileprovider", file);
+        }
+        cropImageUri = Uri.fromFile(file);
 
 
 
@@ -457,6 +467,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
 
         startActivityForResult(intent, return_flag);
     }
+
 
     public Bitmap GetBitmap(String path, int w, int h) {
         BitmapFactory.Options opts = new BitmapFactory.Options();

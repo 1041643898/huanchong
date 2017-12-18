@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.a666.petapp.base.BaseActivity;
-
+//寄养须知
 public class InstructionsActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView iv_back;
@@ -30,6 +30,7 @@ public class InstructionsActivity extends BaseActivity implements View.OnClickLi
     protected void initLisenter() {
 
     }
+
 
     @Override
     public void onClick(View view) {
