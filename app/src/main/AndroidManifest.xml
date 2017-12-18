@@ -35,6 +35,9 @@
         <activity android:name=".homepage.QQActivity" />
         <activity android:name=".homepage.WeiXinActivity" />
 
+
+
+
         <activity android:name=".homepage.city.CityActivity" />
         <!-- 城市筛选 -->
         <activity
@@ -61,6 +64,9 @@
         <activity android:name=".mypet.ImmuneActivity" />
         <activity android:name=".mypet.IfsterilizationActivity" />
         <activity android:name=".mypet.pet.AddweightActivity" />
+
+
+
 
     </application>
 

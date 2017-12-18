@@ -1,20 +1,10 @@
 package com.example.a666.petapp.homepage;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,16 +17,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a666.petapp.R;
 import com.example.a666.petapp.base.BaseActivity;
 import com.example.a666.petapp.homepage.date.CustomDatePicker;
+
+import com.example.a666.petapp.homepage.round_imageview.RoundImageView;
+
 import com.example.a666.petapp.homepage.round_imageview.OnBooleanListener;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.lang.ref.WeakReference;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -63,6 +53,8 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
     public Uri cropImageUri;
     public final int GET_IMAGE_BY_CAMERA_U = 5001;
     public final int CROP_IMAGE_U = 5003;
+
+
     protected static final int CHOOSE_PICTURE = 0;
 
     @Override
@@ -80,6 +72,8 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         });
         super.onResume();
     }
+
+
 
     @Override
     protected int getLayoutID() {
@@ -288,6 +282,11 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
             public void onClick(View view) {
 
 
+
+
+
+
+
                 //Log.d("MainActivity", "进入点击");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {  // 或者 android.os.Build.VERSION_CODES.KITKAT这个常量的值是19
 
@@ -346,6 +345,10 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         });
 
     }
+
+
+
+
 
     private OnBooleanListener onPermissionListener;
 
@@ -452,6 +455,8 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         }
         cropImageUri = Uri.fromFile(file);
 
+
+
         intent.setDataAndType(imageUri, "image/*");
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", aspectX);
@@ -483,4 +488,55 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 BitmapFactory.decodeFile(path, opts));
         return Bitmap.createScaledBitmap(weak.get(), w, h, true);
     }
+
+    private OnBooleanListener onPermissionListener;
+
+
+
+    public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
+        onPermissionListener = onBooleanListener;
+        Log.d("MainActivity", "0");
+        if (ContextCompat.checkSelfPermission(this,
+                permission)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Should we show an explanation?
+            Log.d("MainActivity", "1");
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+                //权限已有
+                onPermissionListener.onClick(true);
+            } else {
+                //没有权限，申请一下
+                ActivityCompat.requestPermissions(this,
+                        new String[]{permission},
+                        1);
+            }
+        }else{
+            onPermissionListener.onClick(true);
+            Log.d("MainActivity", "2"+ ContextCompat.checkSelfPermission(this,
+                    permission));
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //权限通过
+                if (onPermissionListener != null) {
+                    onPermissionListener.onClick(true);
+                }
+            } else {
+                //权限拒绝
+                if (onPermissionListener != null) {
+                    onPermissionListener.onClick(false);
+                }
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
+
 }
