@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      *
      */
-        //小蓝点
+    //小蓝点
     private View mRedDot;
     /**
      * 相邻小灰点之间的距离
