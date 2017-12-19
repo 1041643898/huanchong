@@ -105,7 +105,10 @@
             android:maxLines="10"
             android:textColorHint="#BFBFBF"
             android:minLines="8"
-            android:scrollbars="vertical">
+            android:scrollbars="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
         </EditText>
 

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:orientation="vertical"
+android:layout_height="match_parent"
+android:background="@mipmap/login_bg"
+>
+
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="25dp">
+    <ImageView
+        android:id="@+id/exit"
+        android:background="@mipmap/back"
+
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+    <TextView
+        android:id="@+id/register"
+        android:text="注册"
+        android:textSize="20dp"
+        android:textColor="#f8fcf8"
+        android:gravity="center|right"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
+<TextView
+    android:text="欢迎你加入宠物寄养"
+    android:textSize="25dp"
+    android:gravity="center"
+    android:textColor="#afb7b0"
+    android:layout_width="match_parent"
+    android:layout_height="80dp" />
+
+<EditText
+    android:id="@+id/phome_editText"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:hint="请输入手机号码"
+    android:textColorHint="#afb7b0" />
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+    <EditText
+        android:password="true"
+        android:hint="请输入密码"
+        android:textColorHint="#afb7b0"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:id="@+id/password_editText" />
+
+    <TextView
+        android:id="@+id/login_forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/password_editText"
+        android:layout_alignRight="@+id/password_editText"
+        android:textColor="#a4a40f"
+        android:textSize="20dp"
+        android:layout_centerVertical="true"
+        android:text="忘记密码" />
+</RelativeLayout>
+
+<Button
+    android:text="登录"
+    android:id="@+id/login"
+    android:background="@drawable/shapes"
+    android:layout_width="match_parent"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:textSize="20dp"
+    android:layout_height="wrap_content" />
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:text="使用第三方登陆"
+    android:textSize="15dp"
+    android:gravity="bottom|center"
+    android:textColor="#abb3ac"
+    />
+
+<LinearLayout
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="73dp"
+    android:orientation="horizontal">
+
+    <ImageView
+
+        android:id="@+id/weixin"
+        android:layout_width="70dp"
+        android:layout_height="73dp"
+
+        android:src="@mipmap/login_weixin" />
+
+    <ImageView
+        android:id="@+id/QQ"
+        android:layout_width="wrap_content"
+        android:layout_height="73dp"
+        android:layout_marginLeft="40dp"
+        android:src="@mipmap/login_qq" />
+
+</LinearLayout>
+
+</LinearLayout>

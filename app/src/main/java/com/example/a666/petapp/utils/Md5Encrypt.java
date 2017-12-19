@@ -5,21 +5,22 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * MD5加密算法
+ * Created by 666 on 2017/12/11.
  */
+
 public class Md5Encrypt {
 	/**
 	 * Used building output as Hex
 	 */
-	private static final char[] DIGITS = { '0', '1', '2', '3', '4', '5', '6',
-			'7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+	private static final char[] DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+			'F' };
 
 	/**
 	 * 对字符串进行MD5加密
-	 * 
+	 *
 	 * @param text
 	 *            明文
-	 * 
+	 *
 	 * @return 密文
 	 */
 	public static String md5(String text, String charset) {
@@ -28,8 +29,7 @@ public class Md5Encrypt {
 		try {
 			msgDigest = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
-			throw new IllegalStateException(
-					"System doesn't support MD5 algorithm.");
+			throw new IllegalStateException("System doesn't support MD5 algorithm.");
 		}
 
 		try {
@@ -37,8 +37,7 @@ public class Md5Encrypt {
 
 		} catch (UnsupportedEncodingException e) {
 
-			throw new IllegalStateException(
-					"System doesn't support your  EncodingException.");
+			throw new IllegalStateException("System doesn't support your  EncodingException.");
 
 		}
 

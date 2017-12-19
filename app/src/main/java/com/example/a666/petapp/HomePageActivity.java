@@ -1,10 +1,12 @@
 package com.example.a666.petapp;
+
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -22,27 +24,31 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.a666.petapp.adapter.Home_Page_Adapter;
 import com.example.a666.petapp.adapter.PopupAdapter;
 import com.example.a666.petapp.base.BaseActivity;
-
-import com.example.a666.petapp.homepage.OrderActivity;
-
-
 import com.example.a666.petapp.entity.CJSON;
 import com.example.a666.petapp.entity.Home_FilterBean;
 import com.example.a666.petapp.homepage.OrderActivity;
 import com.example.a666.petapp.homepage.Personal_InformationActivity;
 import com.example.a666.petapp.homepage.PopupButton;
+import com.example.a666.petapp.loginactivity.LoginMainActivity;
+import com.example.a666.petapp.mypet.MyPetActivity;
 import com.example.a666.petapp.utils.AppUtils;
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.zaaach.citypicker.CityPickerActivity;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -50,16 +56,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.H;
+
 public class HomePageActivity extends BaseActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
 
-
-import com.example.a666.petapp.homepage.Personal_InformationActivity;
-import com.example.a666.petapp.homepage.PopupButton;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-
-public class HomePageActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView image_Personage_Centre;
     private EditText edit_sousuo;
@@ -84,9 +86,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private DrawerLayout drawerLayout;
     private LinearLayout liner_nav;
     private PullToRefreshListView main_listview;
-    private TextView tv_pet;
-    private DrawerLayout activity_na;
-
     private PopupWindow popupWindow;
     private CheckBox personal_xizao;
     private CheckBox personal_jiesong;
@@ -105,8 +104,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     public static final String URL = "http://123.56.150.230:8885/dog_family/";
     private TextView tv_pet;
     private DrawerLayout activity_na;
-
-
+    private Intent intent;
 
 
     //初始化窗口属性，让状态栏和导航栏透明
@@ -172,10 +170,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         linear_Pat_Genre.setOnClickListener(this);
         linear_ShaiXuan.setOnClickListener(this);
         linear_name.setOnClickListener(this);
-
-
-
-
         linear_Pet.setOnClickListener(this);
         but_ShenQing.setOnClickListener(this);
         linear_DingDan.setOnClickListener(this);
@@ -184,18 +178,13 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         linear_QianBao.setOnClickListener(this);
         linear_SheZhi.setOnClickListener(this);
 
-
-
         //3个筛选代码
         PopupButtonPopupWindow();
 
     }
 
     private void PopupButtonPopupWindow() {
-
-
 //----------------------------------------------------------------------------------
-
         popu_but_nearby = (PopupButton) findViewById(R.id.popu_but_nearby);
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.popup, null);
@@ -247,7 +236,8 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         });
 
     }
-      //筛选城市
+
+    //筛选城市
     private void popupWindow3() {
         //显示popuwindow
         View inflate = LayoutInflater.from(HomePageActivity.this).inflate(R.layout.homepage_shaixuan_popuwindow, null);
@@ -282,25 +272,17 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 
     //----------------------------------------------------------------------------------
 //主页显示
+
     private String string;
 
 
-
-
-    @Override
-
     private List<Home_FilterBean.DescBean> list;
 
+
     @Override
-
-
-@Override
-
-
     protected void initDate() {
         //主页的ListView 展示
         HomeListView();
-
 
 
     }
@@ -328,7 +310,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 string = response.body().string();
-              Log.e("TAG", "------------------" + string + "----------");
+                Log.e("TAG", "------------------" + string + "----------");
                 runOnUiThread(new Runnable() {
 
 
@@ -398,20 +380,17 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             }
         });
     }
-    //----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+@Override
+protected void initLisenter() {
 
-
-    @Override
-    protected void initLisenter() {
-
-    }
+}
 
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
-            //点击显示侧滑
             case R.id.image_Personage_Centre:
                 if (drawerLayout.isDrawerOpen(liner_nav)) {
                     drawerLayout.closeDrawer(liner_nav);
@@ -422,6 +401,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.edit_sousuo:
                 //搜索城市
+
                 break;
 
             case R.id.image_Orientation:
@@ -429,17 +409,41 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 
                 break;
 
-            //筛选城市定位 选择其他城市
-            case R.id.personal_tiaozhuan:
-                startActivityForResult(new Intent(HomePageActivity.this, CityPickerActivity.class),
-                        REQUEST_CODE_PICK_CITY);
-
-                break;
-
-
             //侧滑的点击事件
             case R.id.linear_name:
-                startActivity(new Intent(HomePageActivity.this, Personal_InformationActivity.class));
+                intent = getIntent();
+                boolean ret = intent.getBooleanExtra("ret", false);
+
+
+
+
+            //    tv_name.setText(qquserName1);
+
+//
+
+
+
+
+                //判断ret的状态  false就是未登录
+                //true 就是登陆成功
+                if (ret==false){
+                    startActivity(new Intent(HomePageActivity.this, LoginMainActivity.class));
+
+
+                }else {
+                    startActivity(new Intent(HomePageActivity.this, Personal_InformationActivity.class));
+
+                  //  Glide.with(this).load(qquserIcon).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(image_name_icon);
+                    //用户名
+                    String userName = intent.getStringExtra("userName");
+                 //手机号
+                    long userPhone1 = intent.getLongExtra("userPhone", 1);
+
+                    tv_name.setText(userName);
+                    tv_phone.setText(userPhone1+"");
+                }
+
+
                 break;
 
             //消息
@@ -449,7 +453,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 break;
             //宠物
             case R.id.linear_Pet:
-
+                startActivity(new Intent(HomePageActivity.this, MyPetActivity.class));
                 break;
             //订单
             case R.id.linear_DingDan:
@@ -468,7 +472,11 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 break;
             //
             case R.id.linear_SheZhi:
+
+
                 Intent intent5=new Intent(HomePageActivity.this, SettingActivity.class);
+
+
                 startActivity(intent5);
                 break;
             //申请成为寄养家庭
@@ -571,6 +579,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         personal_zhongqiu.setOnCheckedChangeListener(this);
         personal_guoqing.setOnCheckedChangeListener(this);
     }
+
     //-----------------------------------------------------------------------------------------------
     //点击两次退出程序
     private static boolean isExit = false;
@@ -581,6 +590,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             isExit = false;
         }
     };
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
@@ -589,6 +599,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
         return super.onKeyDown(keyCode, event);
     }
+
     private void exit() {
         if (!isExit) {
             isExit = true;
@@ -601,4 +612,5 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             System.exit(0);
         }
     }
+
 }

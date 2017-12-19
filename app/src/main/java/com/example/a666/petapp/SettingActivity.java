@@ -1,6 +1,8 @@
 package com.example.a666.petapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,6 +14,7 @@ import com.example.a666.petapp.base.BaseActivity;
 import com.example.a666.petapp.homepage.Setting.MainNewfeatures;
 import com.example.a666.petapp.homepage.Setting.ScoreActivity;
 import com.example.a666.petapp.homepage.Setting.SuggestActivity;
+import com.example.a666.petapp.utils.LocaUtil;
 
 public class SettingActivity extends BaseActivity {
 
@@ -37,6 +40,8 @@ public class SettingActivity extends BaseActivity {
     protected int getLayoutID() {
         return R.layout.activity_setting;
     }
+
+
 
     @Override
     protected void initView() {
@@ -66,6 +71,7 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected void initLisenter() {
+        final LocaUtil locaUtil = new LocaUtil(this);
         //产品建议
         rl_productproposal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,16 +92,54 @@ public class SettingActivity extends BaseActivity {
         recy_pingfen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent=new Intent(SettingActivity.this, ScoreActivity.class);
+
                 startActivity(intent);
             }
         });
+
+        //清除缓存
         img_tuichu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+        rl_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder normalDialog =
+                        new AlertDialog.Builder(SettingActivity.this);
+                normalDialog.setTitle("提示");
+                normalDialog.setMessage("确定清除缓存?");
+                normalDialog.setPositiveButton("确定",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                locaUtil.clearAppCache();
+                                String cacheSize = locaUtil.getCacheSize();
+                                tv_huan.setText(cacheSize);
+                            }
+                        });
+                normalDialog.setNegativeButton("取消",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //...To-do
+                            }
+                        });
+                // 显示
+                normalDialog.show();
+            }
+
+        });
+
+        String cacheSize = locaUtil.getCacheSize();
+        tv_huan.setText(cacheSize);
+
+
+
     }
 
 

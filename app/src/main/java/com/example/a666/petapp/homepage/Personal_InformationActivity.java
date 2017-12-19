@@ -1,10 +1,26 @@
 package com.example.a666.petapp.homepage;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,20 +33,48 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a666.petapp.R;
 import com.example.a666.petapp.base.BaseActivity;
+import com.example.a666.petapp.entity.CJSON;
+import com.example.a666.petapp.entity.ImageItem;
+import com.example.a666.petapp.entity.UploadUtil;
+import com.example.a666.petapp.entity.UserInfo;
 import com.example.a666.petapp.homepage.date.CustomDatePicker;
-
-import com.example.a666.petapp.homepage.round_imageview.RoundImageView;
-
 import com.example.a666.petapp.homepage.round_imageview.OnBooleanListener;
 import com.example.a666.petapp.homepage.round_imageview.RoundImageView;
+import com.example.a666.petapp.utils.AppUtils;
+import com.example.a666.petapp.utils.FileUtil;
+import com.example.a666.petapp.utils.PhotoUtils;
+import com.example.a666.petapp.utils.TableUtils;
+import com.example.a666.petapp.utils.ToastUtil;
+import com.example.a666.petapp.utils.ToastUtils;
 
-
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.example.a666.petapp.R.id.but_Phone;
+import static com.example.a666.petapp.R.id.but_nan;
+import static com.example.a666.petapp.R.id.but_nv;
+import static com.example.a666.petapp.R.id.tv;
+import static com.example.a666.petapp.R.id.tv_name;
 
 public class Personal_InformationActivity extends BaseActivity implements View.OnClickListener {
     private RoundImageView image_icon;
@@ -54,12 +98,31 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
     public final int GET_IMAGE_BY_CAMERA_U = 5001;
     public final int CROP_IMAGE_U = 5003;
 
+    private static final int CODE_GALLERY_REQUEST = 0xa0;
+    private static final int CODE_CAMERA_REQUEST = 0xa1;
+    private static final int CODE_RESULT_REQUEST = 0xa2;
+    private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 0x03;
+    private static final int STORAGE_PERMISSIONS_REQUEST_CODE = 0x04;
+    private File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/photo.jpg");
+    private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
+    private Uri imageUri;
+   // private Uri cropImageUri;
+
+
+
 
     protected static final int CHOOSE_PICTURE = 0;
+    private LinearLayout linear_mayuntuijian;
+    private TextView tv_name_xinxi;
+    private TextView textView;
+    private TextView tv_Date;
+    private TextView tv_shoujihao_xinxi;
+    private TextView tv_weixin_xinxi;
+    private TextView tv_lianxidizhi_xinxi;
 
     @Override
     protected void onResume() {
-
+        super.onResume();
         onPermissionRequests(Manifest.permission.WRITE_EXTERNAL_STORAGE, new OnBooleanListener() {
             @Override
             public void onClick(boolean bln) {
@@ -70,9 +133,59 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 }
             }
         });
-        super.onResume();
-    }
+       // 名字
+        tv_name_xinxi.setText(AppUtils.userInfo.getUserName());
 
+//
+//
+//
+//        //性别
+        int sex = AppUtils.userInfo.getUserSex();
+       if (sex == 1) {
+            tv_Gender.setText("男");
+           AppUtils.userInfo.setUserSex(1);
+        } else {
+           tv_Gender.setText("女");
+            AppUtils.userInfo.setUserSex(2);
+       }
+//
+         Date  birthday = AppUtils.userInfo.getBirthday();
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        tv_date.setText(sf.format(birthday));
+//        //出生年月
+
+
+
+
+
+//
+//
+//        绑定qq
+        long qq = AppUtils.userInfo.getQq();
+       tv_QQ_xinxi.setText("" + qq);
+
+//        //绑定手机号
+        long userPhone = AppUtils.userInfo.getUserPhone();
+        tv_shoujihao_xinxi.setText("" + userPhone);
+
+
+        //绑定微信
+       String wechat = AppUtils.userInfo.getWechat();
+        tv_weixin_xinxi.setText(wechat);
+
+
+
+
+
+
+
+
+        //联系地址
+        String address = AppUtils.userInfo.getAddress();
+        tv_lianxidizhi_xinxi.setText(address);
+
+
+    }
 
 
     @Override
@@ -86,7 +199,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         image_Pull_out = (ImageView) findViewById(R.id.image_Pull_out);
         //上传头像
         image_icon = (RoundImageView) findViewById(R.id.image_icon);
-
+        tv_name_xinxi = (TextView) findViewById(R.id.tv_name_xinxi);
         //设置名字
         linear_Name = (LinearLayout) findViewById(R.id.linear_Name);
         //设置性别
@@ -96,16 +209,20 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         linear_Date_of_Birth = (LinearLayout) findViewById(R.id.linear_Date_of_Birth);
         //显示出生日期
         tv_date = (TextView) findViewById(R.id.tv_Date);
+
         //设置手机号
         linear_Phone = (LinearLayout) findViewById(R.id.linear_Phone);
+        tv_shoujihao_xinxi= (TextView) findViewById(R.id.tv_shoujihao_xinxi);
         //设置微信号
         linear_WeiXin = (LinearLayout) findViewById(R.id.linear_WeiXin);
+        tv_weixin_xinxi= (TextView) findViewById(R.id.tv_weixin_xinxi);
         //QQ 信息未完善系列
         tv_QQ_xinxi = (TextView) findViewById(R.id.tv_QQ_xinxi);
         //QQ
         linear_QQ = (LinearLayout) findViewById(R.id.linear_QQ);
         //联系地址 跳转
         linear_Address = (LinearLayout) findViewById(R.id.linear_Address);
+        tv_lianxidizhi_xinxi= (TextView) findViewById(R.id.tv_lianxidizhi_xinxi);
         image_Pull_out.setOnClickListener(this);
         image_icon.setOnClickListener(this);
         linear_Name.setOnClickListener(this);
@@ -115,6 +232,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         linear_WeiXin.setOnClickListener(this);
         linear_QQ.setOnClickListener(this);
         linear_Address.setOnClickListener(this);
+        AppUtils.setAppContext(this);
 
         //设置出生日期
         ShowDate_of_Birth();
@@ -164,6 +282,8 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
             case R.id.linear_Date_of_Birth:
                 customDatePicker1.show(tv_date.getText().toString());
 
+
+
                 break;
             //手机
             case R.id.linear_Phone:
@@ -183,6 +303,9 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 break;
         }
     }
+
+
+
     //出生日期
 
     private void ShowDate_of_Birth() {
@@ -210,6 +333,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         }, "1900-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker2.showSpecificTime(true); // 显示时和分
         customDatePicker2.setIsLoop(true); // 允许循环滚动
+
     }
 
     // PopupWindow  性别选择
@@ -236,6 +360,10 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
             @Override
             public void onClick(View view) {
                 tv_Gender.setText("男");
+
+                AppUtils.userInfo.setUserSex(1);
+                FileUtil.saveUser(AppUtils.userInfo);
+                UpdateSex();
                 popupWindow.dismiss();
             }
 
@@ -245,12 +373,59 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
             @Override
             public void onClick(View view) {
                 tv_Gender.setText("女");
+                AppUtils.userInfo.setUserSex(2);
+                FileUtil.saveUser(AppUtils.userInfo);
+                UpdateSex();
                 popupWindow.dismiss();
             }
         });
 
 
     }
+//修改性别
+    private void UpdateSex() {
+        Map<String, Object> param = new HashMap<>();
+        param.put(TableUtils.UserInfo.USERID, AppUtils.userInfo.getUserId());
+        param.put(TableUtils.UserInfo.USERSEX, AppUtils.userInfo.getUserSex());
+        // 生成提交服务器的JSON字符串
+        String json = CJSON.toJSONMap(param);
+        // FileUtil.getToken();
+        OkHttpClient ohc = new OkHttpClient();
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add(CJSON.DATA, json);
+        Request request = new Request.Builder()
+
+                .url("http://123.56.150.230:8885/dog_family/user/updateUserInfo.jhtml")
+                .post(builder.build())
+                .build();
+
+        ohc.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String string = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (CJSON.getRET(string)) {
+
+                            ToastUtil.show("修改成功!");
+
+                        } else {
+                            ToastUtil.show("修改失败");
+                        }
+
+                    }
+                });
+
+            }
+        });
+    }
+
 
     // PopupWindow   头像上传
     private void ShowPopupWindow_Icon(View view) {
@@ -270,56 +445,16 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
 
         popupWindow.showAsDropDown(view, 150, 300);
-        Button but_pai = view.findViewById(R.id.but_pai);
-        Button but_Phone = view.findViewById(R.id.but_Phone);
+        Button but_pai =(Button) view.findViewById(R.id.but_pai);
+        Button but_Phone =(Button) view.findViewById(R.id.but_Phone);
 
         Button but_out = view.findViewById(R.id.but_out);
         //拍照
         but_pai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               // autoObtainCameraPermission();
 
-
-
-
-
-
-
-                //Log.d("MainActivity", "进入点击");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {  // 或者 android.os.Build.VERSION_CODES.KITKAT这个常量的值是19
-
-                    onPermissionRequests(Manifest.permission.CAMERA, new OnBooleanListener() {
-                        @Override
-                        public void onClick(boolean bln) {
-                            if (bln) {
-                                Log.d("MainActivity", "进入权限");
-                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                File photoFile = createImagePathFile(Personal_InformationActivity.this);
-                                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-
-                                /*
-                                * 这里就是高版本需要注意的，需用使用FileProvider来获取Uri，同时需要注意getUriForFile
-                                * 方法第二个参数要与AndroidManifest.xml中provider的里面的属性authorities的值一致
-                                * */
-                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                imageUriFromCamera = FileProvider.getUriForFile(Personal_InformationActivity.this,
-                                        "com.xuezj.fileproviderdemo.fileprovider", photoFile);
-                                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriFromCamera);
-
-                                startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
-                            } else {
-                                Toast.makeText(Personal_InformationActivity.this, "扫码拍照或无法正常使用", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-                } else {
-                    imageUriFromCamera = createImagePathUri(Personal_InformationActivity.this);
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                            imageUriFromCamera);
-                    startActivityForResult(intent, GET_IMAGE_BY_CAMERA_U);
-                }
 
                 popupWindow.dismiss();
             }
@@ -327,6 +462,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         but_Phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //autoObtainStoragePermission();
 
                 popupWindow.dismiss();
             }
@@ -342,6 +478,51 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         });
 
     }
+    //上传头像
+
+        public void photoDatas(List<ImageItem> item) {
+            Bitmap bitmap = BitmapFactory.decodeFile(item
+                    .get(0).path);
+            image_icon.setImageBitmap(bitmap);
+            Map<String, Object> param = new HashMap<>();
+            param.put(TableUtils.UserInfo.USERID, AppUtils
+                    .getUser().getUserId());
+            String path = AppUtils.getUser().getUserImage();
+            if (TextUtils.isEmpty(path)) {
+                path = "";
+            }
+            param.put(TableUtils.UserInfo.USERIMAGE,
+                    path);
+            new MyUploadFile().execute(
+                    CJSON.toJSONMap(param),
+                    item.get(0).path);
+        }
+
+
+    class MyUploadFile extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            return new UploadUtil().uploadFile(new File(params[1]),
+                    AppUtils.REQUESTURL + "user/updateImage.jhtml", params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String json) {
+            super.onPostExecute(json);
+            Log.i("TAG", "-----" + json);
+            if (CJSON.getRET(json)) {
+                ToastUtil.show("修改成功");
+                UserInfo user = AppUtils.getUser();
+                user.setUserImage(CJSON.getDESC(json));
+                AppUtils.setUser(user);
+            } else {
+                ToastUtil.show("修改失败");
+            }
+        }
+    }
+
+
 
 
 
@@ -444,8 +625,16 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
     }
 
 
-
-
+    public void cropImage(Uri imageUri, int aspectX, int aspectY,
+                          int return_flag) {
+        File file = new File(this.getExternalCacheDir(), USER_CROP_IMAGE_NAME);
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //高版本一定要加上这两句话，做一下临时的Uri
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            FileProvider.getUriForFile(Personal_InformationActivity.this, "com.xuezj.fileproviderdemo.fileprovider", file);
+        }
+        cropImageUri = Uri.fromFile(file);
 
         intent.setDataAndType(imageUri, "image/*");
         intent.putExtra("crop", "true");
@@ -456,7 +645,9 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         intent.putExtra(MediaStore.EXTRA_OUTPUT, cropImageUri);
 
         startActivityForResult(intent, return_flag);
+
     }
+
 
     public Bitmap GetBitmap(String path, int w, int h) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
@@ -478,53 +669,145 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         return Bitmap.createScaledBitmap(weak.get(), w, h, true);
     }
 
-    private OnBooleanListener onPermissionListener;
-
-
-
-    public void onPermissionRequests(String permission, OnBooleanListener onBooleanListener) {
-        onPermissionListener = onBooleanListener;
-        Log.d("MainActivity", "0");
-        if (ContextCompat.checkSelfPermission(this,
-                permission)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Should we show an explanation?
-            Log.d("MainActivity", "1");
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
-                //权限已有
-                onPermissionListener.onClick(true);
-            } else {
-                //没有权限，申请一下
-                ActivityCompat.requestPermissions(this,
-                        new String[]{permission},
-                        1);
-            }
-        }else{
-            onPermissionListener.onClick(true);
-            Log.d("MainActivity", "2"+ ContextCompat.checkSelfPermission(this,
-                    permission));
-        }
-    }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 1) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //权限通过
-                if (onPermissionListener != null) {
-                    onPermissionListener.onClick(true);
-                }
-            } else {
-                //权限拒绝
-                if (onPermissionListener != null) {
-                    onPermissionListener.onClick(false);
-                }
-            }
-            return;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) and run LayoutCreator again
     }
+
+
+//
+//    /**
+//     * 自动获取相机权限
+//     */
+//    private void autoObtainCameraPermission() {
+//
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+//                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+//                ToastUtils.showShort(this, "您已经拒绝过一次");
+//            }
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, CAMERA_PERMISSIONS_REQUEST_CODE);
+//        } else {//有权限直接调用系统相机拍照
+//            if (hasSdcard()) {
+//                imageUri = Uri.fromFile(fileUri);
+//                //通过FileProvider创建一个content类型的Uri
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    imageUri = FileProvider.getUriForFile(Personal_InformationActivity.this, "com.zz.fileprovider", fileUri);
+//                }
+//                PhotoUtils.takePicture(this, imageUri, CODE_CAMERA_REQUEST);
+//            } else {
+//                ToastUtils.showShort(this, "设备没有SD卡！");
+//            }
+//        }
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//        switch (requestCode) {
+//            //调用系统相机申请拍照权限回调
+//            case CAMERA_PERMISSIONS_REQUEST_CODE: {
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    if (hasSdcard()) {
+//                        imageUri = Uri.fromFile(fileUri);
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+//                            imageUri = FileProvider.getUriForFile(Personal_InformationActivity.this, "com.zz.fileprovider", fileUri);//通过FileProvider创建一个content类型的Uri
+//                        PhotoUtils.takePicture(this, imageUri, CODE_CAMERA_REQUEST);
+//                    } else {
+//                        ToastUtils.showShort(this, "设备没有SD卡！");
+//                    }
+//                } else {
+//
+//                    ToastUtils.showShort(this, "请允许打开相机！！");
+//                }
+//                break;
+//
+//
+//            }
+//            //调用系统相册申请Sdcard权限回调
+//            case STORAGE_PERMISSIONS_REQUEST_CODE:
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    PhotoUtils.openPic(this, CODE_GALLERY_REQUEST);
+//                } else {
+//
+//                    ToastUtils.showShort(this, "请允许打操作SDCard！！");
+//                }
+//                break;
+//            default:
+//        }
+//    }
+//
+//    private static final int OUTPUT_X = 480;
+//    private static final int OUTPUT_Y = 480;
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (resultCode == RESULT_OK) {
+//            switch (requestCode) {
+//                //拍照完成回调
+//                case CODE_CAMERA_REQUEST:
+//                    cropImageUri = Uri.fromFile(fileCropUri);
+//                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+//                    break;
+//                //访问相册完成回调
+//                case CODE_GALLERY_REQUEST:
+//                    if (hasSdcard()) {
+//                        cropImageUri = Uri.fromFile(fileCropUri);
+//                        Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                            newUri = FileProvider.getUriForFile(this, "com.zz.fileprovider", new File(newUri.getPath()));
+//                        }
+//                        PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+//                    } else {
+//                        ToastUtils.showShort(this, "设备没有SD卡！");
+//                    }
+//                    break;
+//                case CODE_RESULT_REQUEST:
+//                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
+//                    if (bitmap != null) {
+//                        showImages(bitmap);
+//                    }
+//                    break;
+//                default:
+//            }
+//        }
+//    }
+
+
+//    /**
+//     * 自动获取sdk权限
+//     */
+//
+//    private void autoObtainStoragePermission() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSIONS_REQUEST_CODE);
+//        } else {
+//            PhotoUtils.openPic(this, CODE_GALLERY_REQUEST);
+//        }
+//
+//    }
+//
+//    private void showImages(Bitmap bitmap) {
+//
+//        image_icon .setImageBitmap(bitmap);
+//    }
+//
+//    /**
+//     * 检查设备是否存在SDCard的工具方法
+//     */
+//    public static boolean hasSdcard() {
+//        String state = Environment.getExternalStorageState();
+//        return state.equals(Environment.MEDIA_MOUNTED);
+//    }
+//
+//
+
 
 
 

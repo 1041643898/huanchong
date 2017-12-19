@@ -33,13 +33,13 @@ public class TokenUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * @描述 :生成访问Token
 	 * @方法名称 :createToken----&gt;TokenUtil.java
 	 * @作�?? :Android - csx
 	 * @创建日期 :2016�?3�?23�? 下午7:14:17
 	 * @return
-	 * 
+	 *
 	 */
 	public static String createToken() {
 		// 生成的token

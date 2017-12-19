@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/corners_bg_top"
+                android:gravity="center"
+                android:text="操作成功"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textSize="38px"
+                android:textColor="#000"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="80px"
+                android:background="#FFF"
+                android:textSize="25px"
+                android:text="您的新密码已修改成功，请直接登录"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+
+            <Button
+                android:id="@+id/btn_queding"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:layout_marginTop="2px"
+                android:background="@drawable/corners_bg_bottom"
+                android:text="确定"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#5CA9FD" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

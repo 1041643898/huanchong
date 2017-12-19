@@ -46,7 +46,6 @@
                     android:backgroundTint="#ffffff"
                     android:drawableLeft="@mipmap/search"
                     android:gravity="center"
-                    android:hint="@string/edit_text_sousuo"
                     android:paddingLeft="10dp"
                     android:textSize="20dp" />
 
@@ -198,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="1234" />
+                    android:text="12344" />
             </LinearLayout>
 
             <ImageView

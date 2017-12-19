@@ -97,7 +97,7 @@
             android:layout_margin="15px"
             android:background="@drawable/item_home_popuwiondw"
             android:button="@null"
-            android:buttonTint="@color/color6"
+
             android:checked="true"
             android:focusable="false"
             android:gravity="center"
@@ -155,7 +155,7 @@
             android:layout_margin="20px"
             android:background="@drawable/item_home_popuwiondw"
             android:button="@null"
-            android:buttonTint="@color/color6"
+
             android:checked="false"
             android:focusable="false"
             android:gravity="center"
@@ -168,8 +168,7 @@
             android:layout_margin="20px"
             android:background="@drawable/item_home_popuwiondw"
             android:button="@null"
-            android:buttonTint="@color/color6"
-            android:checked="false"
+                       android:checked="false"
             android:focusable="false"
             android:gravity="center"
             android:text="清明节接送" />
@@ -187,7 +186,7 @@
             android:layout_margin="20px"
             android:background="@drawable/item_home_popuwiondw"
             android:button="@null"
-            android:buttonTint="@color/color6"
+
             android:checked="false"
             android:focusable="false"
             android:gravity="center"
@@ -200,7 +199,7 @@
             android:layout_margin="20px"
             android:background="@drawable/item_home_popuwiondw"
             android:button="@null"
-            android:buttonTint="@color/color6"
+
             android:checked="true"
             android:focusable="false"
             android:gravity="center"
@@ -213,7 +212,7 @@
             android:layout_margin="20px"
             android:background="@drawable/item_home_popuwiondw"
             android:button="@null"
-            android:buttonTint="@color/color6"
+
             android:checked="false"
             android:focusable="false"
             android:gravity="center"
@@ -233,7 +232,7 @@
             android:layout_margin="20px"
             android:background="@drawable/item_home_popuwiondw"
             android:button="@null"
-            android:buttonTint="@color/color6"
+
             android:checked="false"
             android:focusable="false"
             android:gravity="center"
@@ -286,6 +285,6 @@
         android:layout_marginBottom="10px"
         android:layout_marginLeft="30px"
         android:layout_marginRight="30px"
-        android:background="@color/color6"
+
         android:text="确定" />
 </LinearLayout>
