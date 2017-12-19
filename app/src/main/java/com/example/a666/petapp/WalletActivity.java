@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.a666.petapp.base.BaseActivity;
 
+//钱包
 public class WalletActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView iv_back;

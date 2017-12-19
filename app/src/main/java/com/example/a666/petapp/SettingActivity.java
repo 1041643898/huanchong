@@ -92,7 +92,6 @@ public class SettingActivity extends BaseActivity {
         recy_pingfen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent=new Intent(SettingActivity.this, ScoreActivity.class);
 
                 startActivity(intent);
