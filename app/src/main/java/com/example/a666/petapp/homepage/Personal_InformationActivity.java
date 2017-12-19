@@ -757,7 +757,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
 //                    break;
 //                //访问相册完成回调
 //                case CODE_GALLERY_REQUEST:
-//                    if (hasSdcard()) {
+//                     if (hasSdcard()) {
 //                        cropImageUri = Uri.fromFile(fileCropUri);
 //                        Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
 //                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
