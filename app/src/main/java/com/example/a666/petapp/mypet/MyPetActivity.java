@@ -18,8 +18,12 @@ import com.example.a666.petapp.mypet.mypetadapter.SubAdapter;
 import java.util.ArrayList;
 
 public class MyPetActivity extends AppCompatActivity {
-    private ImageView mypet_imageview;
+    private ImageView image_Pull_out;
     private ListView mypet_listview;
+
+    private int page = 1;
+    public static final String URL = "http://123.56.150.230:8885/dog_family/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +32,20 @@ public class MyPetActivity extends AppCompatActivity {
         initData();
         initDate();
 
+    }
+
+    protected void initDate() {
+        //侵入式状态栏 核心代码.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            //给状态栏设置颜色。我设置透明。
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.TRANSPARENT);
+        }
     }
 
     private void initData() {
@@ -44,7 +62,7 @@ public class MyPetActivity extends AppCompatActivity {
 
             }
         });
-        mypet_imageview.setOnClickListener(new View.OnClickListener() {
+        image_Pull_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -54,21 +72,12 @@ public class MyPetActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mypet_imageview = (ImageView) findViewById(R.id.mypet_imageview);
+        image_Pull_out = (ImageView) findViewById(R.id.image_Pull_out);
         mypet_listview = (ListView) findViewById(R.id.mypet_listview);
+
+
     }
 
-    protected void initDate() {
-        //侵入式状态栏 核心代码.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            //给状态栏设置颜色。我设置透明。
-            window.setStatusBarColor(Color.TRANSPARENT);
-            window.setNavigationBarColor(Color.TRANSPARENT);
-        }
-    }
 }
+
+

@@ -3,6 +3,7 @@ package com.example.a666.petapp.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
+
 import com.example.a666.petapp.entity.UserInfo;
 
 import java.io.FileNotFoundException;
@@ -18,7 +19,7 @@ public class FileUtil {
 
 	/**
 	 * 保存用户
-	 * 
+	 *
 	 * @param user
 	 */
 	public static void saveUser(UserInfo user) {
@@ -162,7 +163,7 @@ public class FileUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * @描述 :读取极光推送结果
 	 */
 	public static int getIsOk() {
@@ -189,7 +190,4 @@ public class FileUtil {
 		}
 		return code;
 	}
-
-
-
 }
