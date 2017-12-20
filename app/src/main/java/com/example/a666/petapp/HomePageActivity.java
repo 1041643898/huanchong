@@ -488,6 +488,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 break;
 
 
+
         }
 
     }
