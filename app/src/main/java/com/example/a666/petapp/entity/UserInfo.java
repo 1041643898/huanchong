@@ -1,5 +1,7 @@
 package com.example.a666.petapp.entity;
 
+import android.widget.TextView;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -333,5 +335,6 @@ public class UserInfo implements Serializable {
 				+ ", coordY=" + coordY + ", intro=" + intro + ", state="
 				+ state + "]";
 	}
+
 
 }
