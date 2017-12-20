@@ -477,6 +477,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 personal_guoqing.setChecked(false);
                 break;
 
+
             //确定
             case R.id.personal_queding:
                 popu_but_ShaiXuan.setChecked(false);
