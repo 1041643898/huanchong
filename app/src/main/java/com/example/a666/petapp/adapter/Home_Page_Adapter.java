@@ -101,34 +101,18 @@ public class Home_Page_Adapter extends BaseAdapter {
 
         Glide.with(context).load(list.get(position).getUserImage()).into(holder.pcv);
 
-
-//        if (list.get(position).getCoordX() != null
-//                && list.get(position).getCoordY() != null
-//                && !list.get(position).getCoordX().isEmpty()
-//                && !list.get(position).getCoordY().isEmpty()) {
-//
+        if (list.get(position).getCoordX() != null
+                && list.get(position).getCoordY() != null
+                && !list.get(position).getCoordX().isEmpty()
+                && !list.get(position).getCoordY().isEmpty()) {
 
 
-//            LatLng startLatlng = new LatLng(Double.parseDouble(list.get(
-//                    position).getCoordX()), Double.parseDouble(list.get(
-//                    position).getCoordY()));
-//            LatLng endLatlng = new LatLng(
-//                    Double.parseDouble(AppUtils.locationY),
-//                    Double.parseDouble(AppUtils.locationX));
-//            // 计算量坐标点距离
-//            Float ssFloat = AMapUtils.calculateLineDistance(startLatlng,
-//                    endLatlng);
-//            Log.d("TAG", ssFloat + "++++++++++++++++++++");
-//            holder.tv_location.setText("距 " + (Math.round(ssFloat / 1000))
-//                    + " km");
 
-//            if (ssFloat <= 1) {
-//                holder.tv_location.setText("距 " + 1 + " km");
-//            }
-//            if (AppUtils.locationX.equals("0.0")) {
-//                holder.tv_location.setText("距 0.0 km");
-//            }
-//        }
+
+
+
+
+        }
         return convertView;
     }
 
