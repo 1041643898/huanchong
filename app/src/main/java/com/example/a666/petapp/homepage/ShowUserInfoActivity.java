@@ -16,6 +16,7 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a666.petapp.R;
 import com.example.a666.petapp.base.BaseActivity;
 
@@ -68,13 +69,15 @@ public class ShowUserInfoActivity extends BaseActivity implements View.OnClickLi
 
         String name = intent.getStringExtra("name");
         String dizhi = intent.getStringExtra("dizhi");
+        String icon = intent.getStringExtra("icon");
 
-        int star = intent.getIntExtra("star", 0);
-
+        int star = intent.getIntExtra("star",0);
+        Glide.with(ShowUserInfoActivity.this).load(icon).into(image_name_icon);
         tv_name.setText(name);
         tv_Address.setText(dizhi);
         tv_jianjie.setText(name + "------" + dizhi);
         mRatingBar.setRating(star);
+
 
     }
 
@@ -99,6 +102,7 @@ public class ShowUserInfoActivity extends BaseActivity implements View.OnClickLi
             //寄养评论
             case R.id.mRelativeLayout_Comments:
 
+                startActivity(new Intent(ShowUserInfoActivity.this, CommentsActivity.class));
                 break;
             //预约寄养跳转界面
             case R.id.mButton_fostered:

@@ -26,12 +26,13 @@
                 android:layout_margin="20dp"
                 android:src="@mipmap/return_back" />
 
+
             <ImageView
                 android:id="@+id/image_icon"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="#1234"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/photos" />
 
         </RelativeLayout>
 
@@ -42,9 +43,10 @@
             <ImageView
                 android:id="@+id/image_name_icon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/ic_launcher"
+                android:layout_alignParentTop="true" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -556,10 +558,11 @@
                 android:background="#e6f123"
                 android:text="预约寄养" />
         </LinearLayout>
+
         <View
-            android:background="#ffffff"
             android:layout_width="match_parent"
-            android:layout_height="30dp"></View>
+            android:layout_height="30dp"
+            android:background="#ffffff"></View>
     </LinearLayout>
 
 

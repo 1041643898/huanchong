@@ -17,7 +17,7 @@
             android:layout_centerVertical="true"
             android:padding="10dp"
             android:text="取消"
-            android:textColor="@color/text1"
+
             android:textSize="16sp" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="请选择时间"
-            android:textColor="@color/text1"
+
             android:textSize="20sp" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_centerVertical="true"
             android:padding="10dp"
             android:text="确定"
-            android:textColor="@color/text1"
+
             android:textSize="16sp" />
 
     </RelativeLayout>
@@ -46,7 +46,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/split_line" />
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:background="@color/background"
+
             android:orientation="horizontal"
             android:paddingBottom="15dp"
             android:paddingLeft="20dp"
@@ -75,7 +75,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="年"
-                android:textColor="@color/text2"
+
                 android:textSize="18sp" />
 
             <com.example.a666.petapp.homepage.date.DatePickerView
@@ -90,7 +90,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="月"
-                android:textColor="@color/text2"
+
                 android:textSize="18sp" />
 
             <com.example.a666.petapp.homepage.date.DatePickerView
@@ -105,7 +105,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="日"
-                android:textColor="@color/text2"
+
                 android:textSize="18sp" />
             <com.example.a666.petapp.homepage.date.DatePickerView
                 android:id="@+id/hour_pv"
@@ -120,7 +120,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="时"
-                android:textColor="@color/text2"
+
                 android:textSize="18sp" />
 
             <com.example.a666.petapp.homepage.date.DatePickerView
@@ -136,7 +136,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="分"
-                android:textColor="@color/text2"
+
                 android:textSize="18sp" />
 
 

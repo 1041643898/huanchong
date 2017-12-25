@@ -15,6 +15,8 @@ import com.example.a666.petapp.entity.Home_FilterBean;
 
 import java.util.List;
 
+import static com.example.a666.petapp.R.id.main_listview_location;
+
 //
 //                       _oo0oo_
 //                      o8888888o
@@ -85,13 +87,14 @@ public class Home_Page_Adapter extends BaseAdapter {
             holder.rBar = (RatingBar) convertView.findViewById(R.id.main_ratingBar1);
             holder.pcv = (ImageView) convertView
                     .findViewById(R.id.main_listview_user_iv);
+            holder.pcv1 = (ImageView) convertView
+                    .findViewById(R.id.main_listview_user);
             holder.tv_location = (TextView) convertView
-                    .findViewById(R.id.main_listview_location);
+                    .findViewById(main_listview_location);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
 
 
         holder.tv_name.setText(list.get(position).getFamily());
@@ -100,19 +103,9 @@ public class Home_Page_Adapter extends BaseAdapter {
         holder.rBar.setRating((Float.parseFloat(list.get(position).getScore()) + 0));
 
         Glide.with(context).load(list.get(position).getUserImage()).into(holder.pcv);
-
-        if (list.get(position).getCoordX() != null
-                && list.get(position).getCoordY() != null
-                && !list.get(position).getCoordX().isEmpty()
-                && !list.get(position).getCoordY().isEmpty()) {
+        holder.tv_location.setText(list.get(position).getCoordX());
 
 
-
-
-
-
-
-        }
         return convertView;
     }
 
@@ -123,5 +116,6 @@ public class Home_Page_Adapter extends BaseAdapter {
         TextView tv_location;
         RatingBar rBar;
         ImageView pcv;
+        ImageView pcv1;
     }
 }

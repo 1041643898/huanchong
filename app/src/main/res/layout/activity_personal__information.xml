@@ -112,12 +112,22 @@
                 android:textColor="#3F3F3F"
                 android:textSize="16dp" />
 
+            <TextView
+                android:id="@+id/tv_name_xinxi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="名字"
+                android:textSize="16dp" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
                 android:background="@mipmap/enter" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -157,12 +167,13 @@
 
             <TextView
                 android:id="@+id/tv_Gender"
-
+                android:text="性别"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
-                android:textSize="20dp" />
+                android:textSize="16dp"
+                />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -208,10 +219,12 @@
 
             <TextView
                 android:id="@+id/tv_Date"
+                android:text="出生年月"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                 />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -244,7 +257,13 @@
                 android:textColor="#3F3F3F"
                 android:textSize="16dp" />
 
-
+            <TextView
+                android:id="@+id/tv_shoujihao_xinxi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="手机号"
+                android:textSize="16dp" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -286,7 +305,13 @@
                 android:text="微信"
                 android:textColor="#3F3F3F"
                 android:textSize="16dp" />
-
+            <TextView
+                android:text="微信"
+                android:gravity="center"
+                android:id="@+id/tv_weixin_xinxi"
+                android:layout_width="wrap_content"
+                android:textSize="16dp"
+                android:layout_height="match_parent" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -377,7 +402,12 @@
                 android:text="联系地址"
                 android:textColor="#3F3F3F"
                 android:textSize="16dp" />
-
+    <TextView
+        android:id="@+id/tv_lianxidizhi_xinxi"
+        android:text="联系地址"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

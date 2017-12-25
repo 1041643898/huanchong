@@ -5,6 +5,7 @@ import android.animation.PropertyValuesHolder;
 import android.app.Dialog;
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -12,12 +13,25 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.a666.petapp.R;
+import com.example.a666.petapp.entity.CJSON;
+import com.example.a666.petapp.utils.AppUtils;
+import com.example.a666.petapp.utils.TableUtils;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by liuwan on 2016/9/28.
@@ -123,6 +137,47 @@ public class CustomDatePicker {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
                 handler.handle(sdf.format(selectedCalender.getTime()));
                 datePickerDialog.dismiss();
+                //绑定日期
+                    Map<String, Object> param = new HashMap<>();
+                    param.put(TableUtils.UserInfo.USERID, AppUtils.userInfo.getUserId());
+                    param.put(TableUtils.UserInfo.BIRTHDAY, sdf.format(selectedCalender.getTime()));
+                    String json = CJSON.toJSONMap(param);
+                    OkHttpClient ohc = new OkHttpClient();
+                    FormBody.Builder builder = new FormBody.Builder();
+                    builder.add(CJSON.DATA, json);
+                    Request request = new Request.Builder()
+                            .post(builder.build())
+                            .url("http://123.56.150.230:8885/dog_family/user/updateUserInfo.jhtml")
+                            .build();
+                    ohc.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            final String string = response.body().string();
+
+
+
+
+                                    Log.e("TAG",string);
+                                    if (CJSON.getRET(string)) {
+
+                                        //ToastUtil.show("修改成功!");
+
+                                    } else {
+                                       // ToastUtil.show("修改失败");
+                                    }
+
+                                }
+
+
+                    });
+
+
+
             }
         });
     }

@@ -6,32 +6,36 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!--/高德/-->
-    <service android:name="com.amap.api.location.APSService"></service>
-    <!--用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-    <!--用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-    <!--用于获取运营商信息，用于支持提供运营商信息相关的接口-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
-    <!--用于访问网络，网络定位需要上网-->
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <!--用于读取手机当前的状态-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
-    <!--用于写入缓存数据到扩展存储卡-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
-    <!--用于申请获取蓝牙信息进行室内定位-->
-    <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- 蓝牙分享所需的权限,不需要用到的话可以省略 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 这里的value要替换成你项目的 -->
     <meta-data
         android:name="com.amap.api.v2.apikey"
@@ -45,21 +49,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".HomePageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomePageActivity" />
         <activity android:name=".homepage.Personal_InformationActivity" />
         <activity android:name=".homepage.Modif_NameActivity" />
         <activity android:name=".homepage.Contact_AddressActivity" />
         <activity android:name=".homepage.QQActivity" />
         <activity android:name=".homepage.WeiXinActivity" />
+        <activity android:name=".loginactivity.LoginMainActivity" />
+        <activity android:name=".mypet.MyPetActivity" />
         <activity android:name=".homepage.city.CityActivity" />
-        <!-- 城市筛选 -->
+        <activity android:name=".mypet.AddpetActivity" />
+        <activity android:name=".loginactivity.Forget_The_PasswordActivity" />
+        <activity android:name=".loginactivity.RegisterActivity" />
+
+         <!--城市筛选 -->
         <activity
             android:name="com.zaaach.citypicker.CityPickerActivity"
             android:screenOrientation="portrait"
@@ -68,6 +77,9 @@
         <activity android:name=".homepage.PhoneActivity" />
         <activity android:name=".homepage.OrderActivity" />
         <activity android:name=".FosterfamiliesActivity" />
+        <activity android:name=".homepage.ShowUserInfoActivity" />
+        <activity android:name=".homepage.ReservationsActivity" />
+        <activity android:name=".homepage.Order_SubmissionActivity" />
         <activity android:name=".NewsActivity" />
         <activity android:name=".WalletActivity" />
         <activity android:name=".InstructionsActivity" />
@@ -75,18 +87,79 @@
         <activity android:name=".homepage.Setting.SuggestActivity" />
         <activity android:name=".homepage.Setting.MainNewfeatures" />
         <activity android:name=".homepage.Setting.ScoreActivity" />
-        <activity android:name=".mypet.AddpetActivity" />
-        <activity android:name=".mypet.PetTypeActivity" />
-        <activity android:name=".order.CloseActivity" />
-        <activity android:name=".mypet.pet.AddpetnameActivity" />
-        <activity android:name=".mypet.MyPetActivity" />
-        <activity android:name=".mypet.ImmuneActivity" />
-        <activity android:name=".mypet.IfsterilizationActivity" />
-        <activity android:name=".mypet.pet.AddweightActivity" />
-        <activity android:name=".homepage.ShowUserInfoActivity" />
-        <activity android:name=".homepage.ReservationsActivity" />
-        <activity android:name=".homepage.Order_SubmissionActivity" />
-        <activity android:name=".homepage.LocationActivity"></activity>
+        <activity android:name=".loginactivity.BindingPhoneActivity" />
+        <activity android:name=".homepage.CalenDarActivity" />
+        <activity android:name=".homepage.CommentsActivity"></activity>
+        <activity android:name=".mypet.IfsterilizationActivity"></activity>
+        <activity android:name=".mypet.PetTypeActivity"></activity>
+        <activity android:name=".mypet.ImmuneActivity"></activity>
+        <activity android:name=".mypet.pet.AddpetnameActivity"></activity>
+        <activity android:name=".mypet.pet.AddweightActivity"></activity>
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <!-- 集成line客户端登录授权，需要添如下格式的过滤器 -->
+            <intent-filter>
+                <data android:scheme="line.1477692153" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!-- ShareSDK<strong>3.1.0版本之前</strong>才需要在MobUIShell下面注册此意图，3.1.0版本之后（包含3.1.0）不需要注册此intent -->
+            <intent-filter>
+                <data android:scheme="tencent100371282" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- //高德地图KEY -->
+        <!-- <meta-data -->
+        <!-- android:name="com.amap.api.v2.apikey" -->
+        <!-- android:value="a8372b540e898568d353a2ef320c22dc"> -->
+        <!-- </meta-data> -->
+        <!-- 填写您从Mob开发者后台中得到的Appkey和AppSecret -->
+        <meta-data
+            android:name="Mob-AppKey"
+            android:value="23216e17832ec" />
+        <meta-data
+            android:name="Mob-AppSecret"
+            android:value="16da691b5af953defbfcda5517b61687" />
+
+        <activity
+            android:name="cn.sharesdk.tencent.qq.ReceiveActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100371282" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.zz.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
     </application>
 
 </manifest>
