@@ -519,7 +519,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 //搜索城市
                 break;
 
-
             case R.id.image_Orientation:
                 //定位
                 // startActivity(new Intent(HomePageActivity.this, LocationActivity.class));
