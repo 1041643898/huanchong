@@ -16,7 +16,6 @@ import com.example.a666.petapp.R;
 import com.example.a666.petapp.entity.CJSON;
 import com.example.a666.petapp.utils.AppUtils;
 import com.example.a666.petapp.utils.TableUtils;
-import com.example.a666.petapp.utils.ToastUtil;
 
 import java.io.IOException;
 import java.text.ParseException;

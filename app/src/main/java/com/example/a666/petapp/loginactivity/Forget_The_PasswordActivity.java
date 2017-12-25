@@ -1,9 +1,7 @@
 package com.example.a666.petapp.loginactivity;
 
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -47,7 +45,6 @@ public class Forget_The_PasswordActivity extends BaseActivity implements View.On
         get_back = (ImageView) findViewById(R.id.get_back);
         submit = (TextView) findViewById(R.id.submit);
         submit.setOnClickListener(this);
-        relative = (RelativeLayout) findViewById(R.id.relative);
         forget_phome_editText = (EditText) findViewById(R.id.forget_phome_editText);
         register_phome = (EditText) findViewById(R.id.register_phome);
         register_auth_code = (TextView) findViewById(R.id.register_auth_code);
@@ -83,6 +80,10 @@ public class Forget_The_PasswordActivity extends BaseActivity implements View.On
                 //提交按钮
                 showPopWindow();
 
+                break;
+            case R.id.get_back:
+
+                finish();
                 break;
 
 

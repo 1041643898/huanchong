@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/corners_bg_bottom"
+                android:background="@drawable/normal"
                 android:text="拍照"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="#007FAA" />

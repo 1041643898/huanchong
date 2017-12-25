@@ -35,11 +35,9 @@
                     android:layout_centerVertical="true"
                     android:src="@mipmap/my" />
 
- `
+
+
                 <EditText
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textCursorDrawable="@null"
                     android:id="@+id/edit_sousuo"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -48,17 +46,21 @@
                     android:backgroundTint="#ffffff"
                     android:drawableLeft="@mipmap/search"
                     android:gravity="center"
+                    android:hint="地区/街道/小区"
+                    android:maxLines="1"
                     android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"
                     android:textSize="20dp" />
 
                 <ImageView
                     android:id="@+id/image_Orientation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/map"
-                    android:layout_alignTop="@+id/image_Personage_Centre"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignTop="@+id/image_Personage_Centre"
+                    android:src="@mipmap/map" />
 
             </RelativeLayout>
 
@@ -79,18 +81,17 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <com.example.a666.petapp.homepage.PopupButton
+                <CheckBox
                     android:id="@+id/popu_but_nearby"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@null"
                     android:button="@null"
-                    android:drawablePadding="10dp"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@drawable/item_filter_arrow"
                     android:gravity="center"
+                    android:onClick="click"
                     android:text="附近优先"
-                    android:textSize="15sp"
-                    popupbtn:normalIcon="@mipmap/down_arrow"
-                    popupbtn:pressIcon="@mipmap/up_arrow" />
+                    android:textSize="15sp" />
             </LinearLayout>
             <!--宠物类型-->
             <LinearLayout
@@ -100,18 +101,18 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <com.example.a666.petapp.homepage.PopupButton
+                <CheckBox
                     android:id="@+id/popu_but_Pat_Genre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:button="@null"
                     android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/item_filter_arrow"
                     android:gravity="center"
+                    android:onClick="click"
                     android:text="宠物类型"
-                    android:textSize="15sp"
-                    popupbtn:normalIcon="@mipmap/down_arrow"
-                    popupbtn:pressIcon="@mipmap/up_arrow" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
             <!--筛选-->
@@ -123,7 +124,6 @@
                 android:gravity="center">
 
                 <CheckBox
-
                     android:id="@+id/popu_but_ShaiXuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -132,6 +132,7 @@
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/item_filter_arrow"
                     android:gravity="center"
+                    android:onClick="click"
                     android:text="筛选"
                     android:textSize="15sp" />
 
@@ -143,8 +144,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.handmark.pulltorefresh.library.PullToRefreshListView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <com.handmark.pulltorefresh.library.PullToRefreshListView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/main_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -177,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/icon_touxiang_persion_gray" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -193,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="1234" />
+                    android:text="未登录" />
 
                 <TextView
                     android:id="@+id/tv_phone"
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="12344" />
+                    android:text="" />
             </LinearLayout>
 
             <ImageView

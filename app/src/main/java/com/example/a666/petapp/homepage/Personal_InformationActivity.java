@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -15,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -46,17 +44,14 @@ import com.example.a666.petapp.homepage.round_imageview.OnBooleanListener;
 import com.example.a666.petapp.homepage.round_imageview.RoundImageView;
 import com.example.a666.petapp.utils.AppUtils;
 import com.example.a666.petapp.utils.FileUtil;
-import com.example.a666.petapp.utils.PhotoUtils;
 import com.example.a666.petapp.utils.TableUtils;
 import com.example.a666.petapp.utils.ToastUtil;
-import com.example.a666.petapp.utils.ToastUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -69,12 +64,6 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static com.example.a666.petapp.R.id.but_Phone;
-import static com.example.a666.petapp.R.id.but_nan;
-import static com.example.a666.petapp.R.id.but_nv;
-import static com.example.a666.petapp.R.id.tv;
-import static com.example.a666.petapp.R.id.tv_name;
 
 public class Personal_InformationActivity extends BaseActivity implements View.OnClickListener {
     private RoundImageView image_icon;
@@ -106,7 +95,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
     private File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/photo.jpg");
     private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
     private Uri imageUri;
-   // private Uri cropImageUri;
+    // private Uri cropImageUri;
 
 
 
@@ -133,7 +122,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
                 }
             }
         });
-       // 名字
+        // 名字
         tv_name_xinxi.setText(AppUtils.userInfo.getUserName());
 
 //
@@ -141,17 +130,17 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
 //
 //        //性别
         int sex = AppUtils.userInfo.getUserSex();
-       if (sex == 1) {
+        if (sex == 1) {
             tv_Gender.setText("男");
-           AppUtils.userInfo.setUserSex(1);
+            AppUtils.userInfo.setUserSex(1);
         } else {
-           tv_Gender.setText("女");
+            tv_Gender.setText("女");
             AppUtils.userInfo.setUserSex(2);
-       }
+        }
 //
-         Date  birthday = AppUtils.userInfo.getBirthday();
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-        tv_date.setText(sf.format(birthday));
+//        Date  birthday = AppUtils.userInfo.getBirthday();
+//        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+//        tv_date.setText(sf.format(birthday));
 //        //出生年月
 
 
@@ -162,7 +151,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
 //
 //        绑定qq
         long qq = AppUtils.userInfo.getQq();
-       tv_QQ_xinxi.setText("" + qq);
+        tv_QQ_xinxi.setText("" + qq);
 
 //        //绑定手机号
         long userPhone = AppUtils.userInfo.getUserPhone();
@@ -170,7 +159,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
 
 
         //绑定微信
-       String wechat = AppUtils.userInfo.getWechat();
+        String wechat = AppUtils.userInfo.getWechat();
         tv_weixin_xinxi.setText(wechat);
 
 
@@ -382,7 +371,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
 
 
     }
-//修改性别
+    //修改性别
     private void UpdateSex() {
         Map<String, Object> param = new HashMap<>();
         param.put(TableUtils.UserInfo.USERID, AppUtils.userInfo.getUserId());
@@ -453,7 +442,7 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
         but_pai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // autoObtainCameraPermission();
+                // autoObtainCameraPermission();
 
 
                 popupWindow.dismiss();
@@ -480,23 +469,23 @@ public class Personal_InformationActivity extends BaseActivity implements View.O
     }
     //上传头像
 
-        public void photoDatas(List<ImageItem> item) {
-            Bitmap bitmap = BitmapFactory.decodeFile(item
-                    .get(0).path);
-            image_icon.setImageBitmap(bitmap);
-            Map<String, Object> param = new HashMap<>();
-            param.put(TableUtils.UserInfo.USERID, AppUtils
-                    .getUser().getUserId());
-            String path = AppUtils.getUser().getUserImage();
-            if (TextUtils.isEmpty(path)) {
-                path = "";
-            }
-            param.put(TableUtils.UserInfo.USERIMAGE,
-                    path);
-            new MyUploadFile().execute(
-                    CJSON.toJSONMap(param),
-                    item.get(0).path);
+    public void photoDatas(List<ImageItem> item) {
+        Bitmap bitmap = BitmapFactory.decodeFile(item
+                .get(0).path);
+        image_icon.setImageBitmap(bitmap);
+        Map<String, Object> param = new HashMap<>();
+        param.put(TableUtils.UserInfo.USERID, AppUtils
+                .getUser().getUserId());
+        String path = AppUtils.getUser().getUserImage();
+        if (TextUtils.isEmpty(path)) {
+            path = "";
         }
+        param.put(TableUtils.UserInfo.USERIMAGE,
+                path);
+        new MyUploadFile().execute(
+                CJSON.toJSONMap(param),
+                item.get(0).path);
+    }
 
 
     class MyUploadFile extends AsyncTask<String, Void, String> {

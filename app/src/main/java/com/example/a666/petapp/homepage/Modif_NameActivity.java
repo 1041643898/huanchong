@@ -26,8 +26,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static android.R.attr.name;
-
 //修改名字
 public class Modif_NameActivity extends BaseActivity implements View.OnClickListener {
 

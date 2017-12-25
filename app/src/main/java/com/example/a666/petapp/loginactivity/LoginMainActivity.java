@@ -16,11 +16,9 @@ import android.widget.Toast;
 
 import com.example.a666.petapp.HomePageActivity;
 import com.example.a666.petapp.R;
-import com.example.a666.petapp.base.BaseActivity;
 import com.example.a666.petapp.entity.CJSON;
 import com.example.a666.petapp.entity.LoginBen;
 import com.example.a666.petapp.entity.UserInfo;
-import com.example.a666.petapp.homepage.Personal_InformationActivity;
 import com.example.a666.petapp.utils.AppUtils;
 import com.example.a666.petapp.utils.FileUtil;
 import com.example.a666.petapp.utils.Md5Encrypt;
@@ -46,7 +44,7 @@ import okhttp3.Response;
 
 import static android.R.attr.action;
 
-public class LoginMainActivity extends AppCompatActivity implements View.OnClickListener, PlatformActionListener,Handler.Callback {
+public class LoginMainActivity extends AppCompatActivity implements View.OnClickListener, PlatformActionListener, Handler.Callback {
     private static final int MSG_ACTION_CCALLBACK = 0;
     private ImageView exit;
     private TextView register;
@@ -69,9 +67,6 @@ public class LoginMainActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-
-
-
     private void initView() {
         exit = (ImageView) findViewById(R.id.exit);
         register = (TextView) findViewById(R.id.register);
@@ -83,11 +78,10 @@ public class LoginMainActivity extends AppCompatActivity implements View.OnClick
         login = (Button) findViewById(R.id.login);
         weixin = (ImageView) findViewById(R.id.weixin);
         Q = (ImageView) findViewById(R.id.QQ);
-            Q.setOnClickListener(this);
+        Q.setOnClickListener(this);
         login.setOnClickListener(this);
-
+        exit.setOnClickListener(this);
     }
-
 
 
     @Override
@@ -99,91 +93,90 @@ public class LoginMainActivity extends AppCompatActivity implements View.OnClick
 
                 String phome = phome_editText.getText().toString();
                 String pasword = password_editText.getText().toString();
-                if (phome.equals("")|pasword.equals("")){
-                    Toast.makeText(LoginMainActivity.this, "账号密码不能为空" , Toast.LENGTH_SHORT).show();
+                if (phome.equals("") | pasword.equals("")) {
+                    Toast.makeText(LoginMainActivity.this, "账号密码不能为空", Toast.LENGTH_SHORT).show();
 
-                }else {
-
-
-                Map<String, Object> param = new HashMap<>();
-                param.put("userPhone", phome);
-                param.put("password", Md5Encrypt.md5(pasword, "UTF-8"));
-                  //  FileUtil.saveToken();// 保存Token
-                // 生成提交服务器的JSON字符串
-                String json = CJSON.toJSONMap(param);
-
-                FormBody.Builder builder = new FormBody.Builder();
-                builder.add(CJSON.DATA, json);
-                OkHttpClient ohc = new OkHttpClient();
-                Request request = new Request.Builder()
-                        .url("http://123.56.150.230:8885/dog_family/user/login.jhtml")
-                        .post(builder.build())
-                        .build();
-
-                ohc.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        final String string = response.body().string();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(LoginMainActivity.this,   string, Toast.LENGTH_SHORT).show();
-                                Log.e("TAG_____denglu",string);
-                                UserInfo userInfo = CJSON.parseObject(CJSON.getRESULT(string), UserInfo.class);
-                                AppUtils.setUser(userInfo);
-                                FileUtil.saveUser(AppUtils.userInfo);
-                                Intent intent = new Intent(LoginMainActivity.this,HomePageActivity.class);
-
-                        //登陆成功后会返回一个字符串，通过解析字符串 得到数据 将需要的数据进行传递使用；
-                                Gson gson = new Gson();
-
-                                LoginBen loginBen = gson.fromJson(string, LoginBen.class);
-
-                                boolean ret = loginBen.isRet();
+                } else {
 
 
-                                String userName = loginBen.getResult().getUserName();
+                    Map<String, Object> param = new HashMap<>();
+                    param.put("userPhone", phome);
+                    param.put("password", Md5Encrypt.md5(pasword, "UTF-8"));
+                    //  FileUtil.saveToken();// 保存Token
+                    // 生成提交服务器的JSON字符串
+                    String json = CJSON.toJSONMap(param);
+
+                    FormBody.Builder builder = new FormBody.Builder();
+                    builder.add(CJSON.DATA, json);
+                    OkHttpClient ohc = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://123.56.150.230:8885/dog_family/user/login.jhtml")
+                            .post(builder.build())
+                            .build();
+
+                    ohc.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            final String string = response.body().string();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(LoginMainActivity.this, string, Toast.LENGTH_SHORT).show();
+                                    Log.e("TAG_____denglu", string);
+                                    UserInfo userInfo = CJSON.parseObject(CJSON.getRESULT(string), UserInfo.class);
+                                    AppUtils.setUser(userInfo);
+                                    FileUtil.saveUser(AppUtils.userInfo);
+                                    Intent intent = new Intent(LoginMainActivity.this, HomePageActivity.class);
+
+                                    //登陆成功后会返回一个字符串，通过解析字符串 得到数据 将需要的数据进行传递使用；
+                                    Gson gson = new Gson();
+
+                                    LoginBen loginBen = gson.fromJson(string, LoginBen.class);
+
+                                    boolean ret = loginBen.isRet();
 
 
-                                long userPhone = loginBen.getResult().getUserPhone();
+                                    String userName = loginBen.getResult().getUserName();
 
 
-                                //登陆状态获取；
-                                intent.putExtra("ret",ret);
-
-                                //名字
-                                intent.putExtra("userName",userName);
-
-                                //手机号
-                                intent.putExtra("userPhone",userPhone);
+                                    long userPhone = loginBen.getResult().getUserPhone();
 
 
+                                    //登陆状态获取；
+                                    intent.putExtra("ret", ret);
 
-                                startActivity(intent);
-                            }
-                        });
+                                    //名字
+                                    intent.putExtra("userName", userName);
 
-                    }
-                });
+                                    //手机号
+                                    intent.putExtra("userPhone", userPhone);
+
+
+                                    startActivity(intent);
+                                }
+                            });
+
+                        }
+                    });
                 }
 
                 break;
             case R.id.register:
                 //注册
-                Intent intent = new Intent(this,RegisterActivity.class);
+                Intent intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
 
                 break;
             //忘记密码
-          case  R.id . login_forget_password:
-              Intent intent2 = new Intent(this,Forget_The_PasswordActivity.class);
-              startActivity(intent2);
-              break;
+            case R.id.login_forget_password:
+                Intent intent2 = new Intent(this, Forget_The_PasswordActivity.class);
+                startActivity(intent2);
+                break;
 
             case R.id.QQ:
                 Platform qq = ShareSDK.getPlatform(QQ.NAME);
@@ -197,10 +190,14 @@ public class LoginMainActivity extends AppCompatActivity implements View.OnClick
 
 
                 break;
+            case R.id.exit:
+                finish();
+                break;
 
 
         }
     }
+
     //授权
     private void authorize(Platform plat, int type) {
         switch (type) {
@@ -216,10 +213,9 @@ public class LoginMainActivity extends AppCompatActivity implements View.OnClick
         }
         if (plat.isAuthValid()) { //如果授权就删除授权资料
             plat.removeAccount(true);
-       }
+        }
         plat.showUser(null);//授权并获取用户信息
     }
-
 
 
     //登陆授权成功的回调
@@ -272,11 +268,11 @@ public class LoginMainActivity extends AppCompatActivity implements View.OnClick
                 String userIcon = platform.getDb().getUserIcon();//获取用户头像
                 String userGender = platform.getDb().getUserGender(); //获取用户性别，m = 男, f = 女，如果微信没有设置性别,默认返回null
                 Toast.makeText(LoginMainActivity.this, "用户信息为--用户名：" + userName + "  性别：" + userGender, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginMainActivity.this,BindingPhoneActivity.class);
-                intent.putExtra("userName",userName);
-                intent.putExtra("userIcon",userIcon);
-                intent.putExtra("userGender",userGender);
-                intent.putExtra("userId",userId);
+                Intent intent = new Intent(LoginMainActivity.this, BindingPhoneActivity.class);
+                intent.putExtra("userName", userName);
+                intent.putExtra("userIcon", userIcon);
+                intent.putExtra("userGender", userGender);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
 
                 //下面就可以利用获取的用户信息登录自己的服务器或者做自己想做的事啦!

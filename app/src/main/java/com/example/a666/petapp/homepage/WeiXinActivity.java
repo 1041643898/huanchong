@@ -26,8 +26,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static android.R.attr.name;
-
 public class WeiXinActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView image_Pull_out;

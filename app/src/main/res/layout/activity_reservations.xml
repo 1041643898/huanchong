@@ -60,7 +60,7 @@
                 android:background="#FFFFFF"
                 android:padding="10dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -70,9 +70,11 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/text_v"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:paddingLeft="5dp"
                         android:text="开始时间"
                         android:textSize="16sp" />
 
@@ -80,12 +82,16 @@
                         android:id="@+id/begin_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_v"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:text="2016-4-20"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-                </LinearLayout>
+
+
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/foster_time"
@@ -141,6 +147,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#ffffff"
@@ -219,6 +226,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_Day_Shu"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
                         android:gravity="center"
@@ -229,11 +237,12 @@
 
 
                     <TextView
+                        android:id="@+id/tv_Foster_Day_money"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="120.00元" />
+                        android:text="30.00元" />
                 </LinearLayout>
 
                 <View

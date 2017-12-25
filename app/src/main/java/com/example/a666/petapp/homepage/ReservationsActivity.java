@@ -2,6 +2,7 @@ package com.example.a666.petapp.homepage;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,10 +15,15 @@ import android.widget.Toast;
 import com.example.a666.petapp.R;
 import com.example.a666.petapp.base.BaseActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ReservationsActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView image_Pull_out;
     private TextView begin_time;
+    private TextView begin_time2;
     private TextView foster_time;
     private TextView end_time;
     private ImageView pet_photo;
@@ -34,7 +40,9 @@ public class ReservationsActivity extends BaseActivity implements View.OnClickLi
     private ImageView pet_service_num_add2;
     private TextView pet_service_money2;
     private TextView pet_service_num;
+    private TextView tv_Day_Shu;
     private TextView pet_service_num2;
+    private TextView tv_Foster_Day_money;
 
     private TextView tv_TotalMoney;
     private LinearLayout foster_pet_list;
@@ -46,7 +54,8 @@ public class ReservationsActivity extends BaseActivity implements View.OnClickLi
 
     int a = 0;
     int b = 0;
-    int c = 60;
+    private long days;
+
 
     @Override
     protected int getLayoutID() {
@@ -55,13 +64,20 @@ public class ReservationsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initView() {
+
+
         image_Pull_out = (ImageView) findViewById(R.id.image_Pull_out);
         //起始时间
         begin_time = (TextView) findViewById(R.id.begin_time);
         // 总共天数
         foster_time = (TextView) findViewById(R.id.foster_time);
+        foster_time.setOnClickListener(this);
         //结束时间
         end_time = (TextView) findViewById(R.id.end_time);
+
+        tv_Day_Shu = (TextView) findViewById(R.id.tv_Day_Shu);
+
+        tv_Foster_Day_money = (TextView) findViewById(R.id.tv_Foster_Day_money);
         //宠物照片
         pet_photo = (ImageView) findViewById(R.id.pet_photo);
         //宠物名字
@@ -111,10 +127,48 @@ public class ReservationsActivity extends BaseActivity implements View.OnClickLi
 
         pet_service_num_add.setOnClickListener(this);
         pet_service_num_add2.setOnClickListener(this);
+
+
     }
+
+
+
 
     @Override
     protected void initDate() {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        final String str = formatter.format(curDate);
+
+        begin_time.setText(str);
+
+        Intent intent = getIntent();
+        String date = intent.getStringExtra("date");
+        end_time.setText(date);
+
+
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date d1 = df.parse(date);
+            Log.e("TAG", d1 + "时间");
+            Date d2 = df.parse(str);
+            Log.e("TAG", d2 + "时间");
+            long diff = d1.getTime() - d2.getTime();//这样得到的差值是微秒级别
+            days = diff / (1000 * 60 * 60 * 24);
+
+            Log.e("TAG", "" + days + "天");
+
+        } catch (Exception e) {
+        }
+        foster_time.setText(days + "晚");
+        tv_Day_Shu.setText(days + "天");
+
+
+
+
+
 
     }
 
@@ -128,6 +182,13 @@ public class ReservationsActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.image_Pull_out:
                 finish();
+                break;
+            case R.id.foster_time:
+                startActivity(new Intent(ReservationsActivity.this, CalenDarActivity.class));
+                finish();
+//                begin_time
+//                end_time
+//                foster_time
                 break;
 
             case R.id.pet_service_num_dec:
@@ -148,8 +209,7 @@ public class ReservationsActivity extends BaseActivity implements View.OnClickLi
 
                 } else {
                     if (a == 4) {
-                       
-                        Toast.makeText(ReservationsActivity.this, "最多可添加三个", Toast.LENGTH_SHORT).show();
+
                     }
                 }
                 break;

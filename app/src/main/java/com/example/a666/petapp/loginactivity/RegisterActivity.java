@@ -1,18 +1,15 @@
 package com.example.a666.petapp.loginactivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a666.petapp.MainActivity;
 import com.example.a666.petapp.R;
 import com.example.a666.petapp.base.BaseActivity;
 import com.example.a666.petapp.entity.CJSON;
@@ -54,11 +51,19 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     }
 
+    //初始化窗口属性，让状态栏和导航栏透明
+    private void initWindow() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+        }
+    }
     protected void initView() {
+        initWindow();
         register_cancel = (TextView) findViewById(R.id.register_cancel);
         register_cancel.setOnClickListener(this);
-        login = (TextView) findViewById(R.id.login);
-        login.setOnClickListener(this);
+
 
         register_phome = (EditText) findViewById(R.id.register_phome);
         register_auth_code = (TextView) findViewById(R.id.register_auth_code);
@@ -70,6 +75,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         register = (Button) findViewById(R.id.register);
         register_weixin = (ImageView) findViewById(R.id.register_weixin);
         register_QQ = (ImageView) findViewById(R.id.register_QQ);
+        register.setOnClickListener(this);
         AppUtils.setAppContext(this);
 
 
@@ -131,10 +137,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.register_cancel:
                 finish();
                 break;
-            case R.id.login:
-                Intent intent = new Intent(this, LoginMainActivity.class);
-                startActivity(intent);
-                break;
+
 
         }
     }

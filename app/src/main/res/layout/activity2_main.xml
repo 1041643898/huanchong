@@ -8,28 +8,37 @@ android:layout_height="match_parent"
 android:background="@mipmap/login_bg"
 >
 
-
-<LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="25dp">
-    <ImageView
-        android:id="@+id/exit"
-        android:background="@mipmap/back"
-
-        android:layout_width="20dp"
-        android:layout_height="20dp" />
-    <TextView
-        android:id="@+id/register"
-        android:text="注册"
-        android:textSize="20dp"
-        android:textColor="#f8fcf8"
-        android:gravity="center|right"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginRight="10dp"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content">
+        <!--android:fitsSystemWindows="true"-->
 
-</LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/back" />
+
+
+            <TextView
+                android:id="@+id/register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="注册"
+                android:textColor="#f8fcf8"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 <TextView
     android:text="欢迎你加入宠物寄养"
     android:textSize="25dp"
